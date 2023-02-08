@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "website/**.[tj]sx?"
+      - "website/**.css"
       - "website/**.md"
       - "website/package.json"
       - "website/pnpm-lock.yaml"
@@ -14,6 +15,7 @@ on:
   pull_request:
     paths:
       - "website/**.[tj]sx?"
+      - "website/**.css"
       - "website/**.md"
       - "website/package.json"
       - "website/pnpm-lock.yaml"
@@ -88,6 +90,7 @@ jobs:
 
       - name: Deploy to cloudflare pages
         env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
           npx wrangler pages publish ./out --project-name=aleksac-me --branch ${{ github.head_ref || github.ref_name }}
