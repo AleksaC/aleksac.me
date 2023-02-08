@@ -1,0 +1,64 @@
+name: Lighthouse CI
+
+on:
+  workflow_run:
+    workflows:
+      - Deploy the website
+    types:
+      - completed
+    branches:
+      # TODO: try getting preview url from the deploy workflow and run on it if possible
+      - main
+
+defaults:
+  run:
+    shell: bash
+    working-directory: website
+
+jobs:
+  ligthouse-ci-mobile:
+    runs-on: ubuntu-22.04
+    env:
+      LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3.3.0
+      - uses: actions/setup-node@v3.6.0
+        with:
+          node-version: "18"
+      - uses: actions/cache@v3.2.3
+        with:
+          path: ~/.npm/_npx
+          key: npx-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            npx-${{ runner.os }}
+      - name: Run lighthouse ci for mobile
+        env:
+          WEBSITE_URL: https://aleksac.me
+        run: |
+          npx @lhci/cli@0.10.0 collect
+          npx @lhci/cli@0.10.0 upload --githubStatusContextSuffix /mobile
+          npx @lhci/cli@0.10.0 assert
+
+  ligthouse-ci-desktop:
+    runs-on: ubuntu-22.04
+    env:
+      LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3.3.0
+      - uses: actions/setup-node@v3.6.0
+        with:
+          node-version: "18"
+      - uses: actions/cache@v3.2.3
+        with:
+          path: ~/.npm/_npx
+          key: npx-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            npx-${{ runner.os }}
+      - name: Run lighthouse ci for desktop
+        if: always()
+        env:
+          WEBSITE_URL: https://aleksac.me
+        run: |
+          DEVICE_TYPE=desktop npx @lhci/cli@0.10.0 collect
+          npx @lhci/cli@0.10.0 upload --githubStatusContextSuffix /desktop
+          npx @lhci/cli@0.10.0 assert

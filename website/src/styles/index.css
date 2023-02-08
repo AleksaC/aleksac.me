@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  p a {
+    @apply text-blue-600 underline;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-bold;
+  }
+
+  h3 {
+    @apply text-2xl font-semibold leading-snug;
+  }
+
+  code {
+    @apply bg-gray-300;
+    @apply py-0.5;
+    @apply px-1.5;
+    @apply rounded-md;
+    @apply whitespace-pre;
+  }
+
+  blockquote {
+    @apply italic;
+    @apply text-gray-600;
+    @apply border-l-2;
+    @apply pl-3;
+  }
+
+  ul {
+    @apply list-disc;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  li {
+    @apply ml-12;
+  }
+}
+
+.icon-link {
+  @apply inline-block;
+  @apply w-5 h-5;
+  @apply mr-2;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='black'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244' /%3E%3C/svg%3E%0A");
+}
+
+.dark .icon-link {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244' /%3E%3C/svg%3E%0A");
+}
+
+.dark {
+  @apply bg-blackish;
+}
+
+.dark p a {
+  @apply text-sky-500;
+}
+
+.dark code {
+  @apply bg-[#2F3336];
+}
+
+.dark blockquote {
+  @apply text-[#B1AAA0];
+  @apply border-[#B1AAA0];
+}

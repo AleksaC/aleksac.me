@@ -1,0 +1,93 @@
+name: Deploy the website
+
+on:
+  push:
+    paths:
+      - "website/**.[tj]sx?"
+      - "website/**.md"
+      - "website/package.json"
+      - "website/pnpm-lock.yaml"
+      - "website/tsconfig.json"
+      - ".github/workflows/deploy.yml"
+    branches:
+      - main
+  pull_request:
+    paths:
+      - "website/**.[tj]sx?"
+      - "website/**.md"
+      - "website/package.json"
+      - "website/pnpm-lock.yaml"
+      - "website/tsconfig.json"
+      - ".github/workflows/deploy.yml"
+    branches:
+      - main
+
+defaults:
+  run:
+    shell: bash
+    working-directory: website
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 7
+
+      - name: Set up node
+        uses: actions/setup-node@v3.6.0
+        with:
+          node-version: "18"
+          cache: pnpm
+          cache-dependency-path: website/pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Set up eslint and tsbuildinfo cache
+        uses: actions/cache@v3.2.3
+        with:
+          path: |
+            website/.eslintcache
+            website/tsconfig.tsbuildinfo
+          key: static-analysis-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            static-analysis-${{ runner.os }}
+
+      - name: Run linting & type checking
+        run: |
+          yarn typecheck
+          yarn lint-ci
+
+      - name: Set up next build cache
+        uses: actions/cache@v3.2.3
+        with:
+          path: website/.next
+          key: next-build-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            next-build-${{ runner.os }}
+
+      - name: Run build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
+        run: |
+          pnpm run build
+          pnpm run export
+
+      - name: Set up npx cache
+        uses: actions/cache@v3.2.3
+        with:
+          path: ~/.npm/_npx
+          key: npx-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            npx-${{ runner.os }}
+
+      - name: Deploy to cloudflare pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          npx wrangler pages publish ./out --project-name=aleksac-me --branch ${{ github.head_ref || github.ref_name }}
