@@ -58,10 +58,13 @@ jobs:
         env:
           WEBSITE_URL: https://aleksac.me
         run: |
+          export WEBSITE_URL="https://aleksac.me"
+
           unzip $GITHUB_WORKSPACE/branch-name.zip
           BRANCH_NAME="$(cat branch-name)"
+
           if [ "$BRANCH_NAME" != "main" ]; then
-              echo "WEBSITE_URL=https://$BRANCH_NAME.aleksac-me.pages.dev" >> $GITHUB_ENV
+              export "WEBSITE_URL=https://$BRANCH_NAME.aleksac-me.pages.dev" >> $GITHUB_ENV
           fi
 
           npx @lhci/cli@0.10.0 collect
@@ -108,13 +111,14 @@ jobs:
 
       - name: Run lighthouse ci for desktop
         if: always()
-        env:
-          WEBSITE_URL: https://aleksac.me
         run: |
+          export WEBSITE_URL="https://aleksac.me"
+
           unzip $GITHUB_WORKSPACE/branch-name.zip
           BRANCH_NAME="$(cat branch-name)"
+
           if [ "$BRANCH_NAME" != "main" ]; then
-              echo "WEBSITE_URL=https://$BRANCH_NAME.aleksac-me.pages.dev" >> $GITHUB_ENV
+              export "WEBSITE_URL=https://$BRANCH_NAME.aleksac-me.pages.dev" >> $GITHUB_ENV
           fi
 
           DEVICE_TYPE=desktop npx @lhci/cli@0.10.0 collect
