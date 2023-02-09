@@ -6,9 +6,6 @@ on:
       - Deploy the website
     types:
       - completed
-    branches:
-      # TODO: try getting preview url from the deploy workflow and run on it if possible
-      - main
 
 defaults:
   run:
@@ -35,6 +32,10 @@ jobs:
         env:
           WEBSITE_URL: https://aleksac.me
         run: |
+          if [ "$GITHUB_REF_NAME" != "main" ]; then
+              export WEBSITE_URL="https://$GITHUB_REF_NAME.aleksac-me.pages.dev"
+          fi
+
           npx @lhci/cli@0.10.0 collect
           npx @lhci/cli@0.10.0 upload --githubStatusContextSuffix /mobile
           npx @lhci/cli@0.10.0 assert
@@ -59,6 +60,10 @@ jobs:
         env:
           WEBSITE_URL: https://aleksac.me
         run: |
+          if [ "$GITHUB_REF_NAME" != "main" ]; then
+              export WEBSITE_URL="https://$GITHUB_REF_NAME.aleksac-me.pages.dev"
+          fi
+
           DEVICE_TYPE=desktop npx @lhci/cli@0.10.0 collect
           npx @lhci/cli@0.10.0 upload --githubStatusContextSuffix /desktop
           npx @lhci/cli@0.10.0 assert
