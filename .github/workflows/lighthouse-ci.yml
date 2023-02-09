@@ -54,13 +54,11 @@ jobs:
             let fs = require('fs');
             fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/branch-name.zip`, Buffer.from(download.data));
 
-      - name: Unzip artifact
-        run: unzip branch-name.zip
-
       - name: Run lighthouse ci for mobile
         env:
           WEBSITE_URL: https://aleksac.me
         run: |
+          unzip ../branch-name.zip
           BRANCH_NAME="$(cat branch-name)"
           if [ "BRANCH_NAME" != "main" ]; then
               echo "WEBSITE_URL=https://$BRANCH_NAME.aleksac-me.pages.dev" >> $GITHUB_ENV
@@ -108,14 +106,12 @@ jobs:
             let fs = require('fs');
             fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/branch-name.zip`, Buffer.from(download.data));
 
-      - name: Unzip branch name artifact
-        run: unzip $GITHUB_WORKSPACE/branch-name.zip
-
       - name: Run lighthouse ci for desktop
         if: always()
         env:
           WEBSITE_URL: https://aleksac.me
         run: |
+          unzip ../branch-name.zip
           BRANCH_NAME="$(cat branch-name)"
           if [ "BRANCH_NAME" != "main" ]; then
               echo "WEBSITE_URL=https://$BRANCH_NAME.aleksac-me.pages.dev" >> $GITHUB_ENV
