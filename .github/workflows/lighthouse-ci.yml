@@ -109,7 +109,7 @@ jobs:
             fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/branch-name.zip`, Buffer.from(download.data));
 
       - name: Unzip branch name artifact
-        run: unzip branch-name.zip
+        run: unzip $GITHUB_WORKSPACE/branch-name.zip
 
       - name: Run lighthouse ci for desktop
         if: always()
