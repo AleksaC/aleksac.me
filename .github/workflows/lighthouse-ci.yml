@@ -33,7 +33,7 @@ jobs:
           WEBSITE_URL: https://aleksac.me
         run: |
           if [ "$GITHUB_REF_NAME" != "main" ]; then
-              export WEBSITE_URL="https://$GITHUB_REF_NAME.aleksac-me.pages.dev"
+              echo "WEBSITE_URL=https://$GITHUB_REF_NAME.aleksac-me.pages.dev" >> $GITHUB_ENV
           fi
 
           npx @lhci/cli@0.10.0 collect
@@ -61,7 +61,7 @@ jobs:
           WEBSITE_URL: https://aleksac.me
         run: |
           if [ "$GITHUB_REF_NAME" != "main" ]; then
-              export WEBSITE_URL="https://$GITHUB_REF_NAME.aleksac-me.pages.dev"
+              echo "WEBSITE_URL=https://$GITHUB_REF_NAME.aleksac-me.pages.dev" >> $GITHUB_ENV
           fi
 
           DEVICE_TYPE=desktop npx @lhci/cli@0.10.0 collect
