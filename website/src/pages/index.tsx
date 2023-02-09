@@ -21,12 +21,12 @@ const Index = () => {
         <div>
           <h3 className="mb-4">About me</h3>
           <p>
-            Hi, I'm Aleksa Ćuković, a software engineer from Montenegro. I enjoy
-            solving problems and building things. I especially like building
-            stuff that I can use myself, hence I prefer to work on
-            infrastructure and developer tooling. When I'm not working I'm
-            probably hanging out with my friends and family, lifting weights,
-            playing basketball or playing EU4.
+            This is a test Hi, I'm Aleksa Ćuković, a software engineer from
+            Montenegro. I enjoy solving problems and building things. I
+            especially like building stuff that I can use myself, hence I prefer
+            to work on infrastructure and developer tooling. When I'm not
+            working I'm probably hanging out with my friends and family, lifting
+            weights, playing basketball or playing EU4.
             <br />
             <br />
             Not long ago my main interest was AI/ML. My main contribution to the
