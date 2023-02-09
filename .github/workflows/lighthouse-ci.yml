@@ -64,7 +64,8 @@ jobs:
           BRANCH_NAME="$(cat branch-name)"
 
           if [ "$BRANCH_NAME" != "main" ]; then
-              export "WEBSITE_URL=https://$BRANCH_NAME.aleksac-me.pages.dev" >> $GITHUB_ENV
+              export "WEBSITE_URL=https://$BRANCH_NAME.aleksac-me.pages.dev"
+              export PREVIEW=true
           fi
 
           npx @lhci/cli@0.10.0 collect
@@ -118,7 +119,8 @@ jobs:
           BRANCH_NAME="$(cat branch-name)"
 
           if [ "$BRANCH_NAME" != "main" ]; then
-              export "WEBSITE_URL=https://$BRANCH_NAME.aleksac-me.pages.dev" >> $GITHUB_ENV
+              export "WEBSITE_URL=https://$BRANCH_NAME.aleksac-me.pages.dev"
+              export PREVIEW=true
           fi
 
           DEVICE_TYPE=desktop npx @lhci/cli@0.10.0 collect

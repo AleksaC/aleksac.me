@@ -7,6 +7,7 @@ const str2Bool = (str) =>
   ["true", "1", "y", "yes"].reduce((o, k) => ({ ...o, [k]: null }), {});
 
 const prefix = process.env.WEBSITE_URL || "http://localhost:3000";
+const isPreview = str2Bool(process.env.PREVIEW || "false");
 const deviceType = process.env.DEVICE_TYPE || "mobile";
 
 module.exports = {
@@ -30,6 +31,7 @@ module.exports = {
     assert: {
       preset: "lighthouse:no-pwa",
       assertions: {
+        "is-crawlable": isPreview ? "off" : "error",
         // since this is a static website with no user input and no third party
         // scripts at the moment adding csp is more trouble than it's worth
         "csp-xss": "off",
