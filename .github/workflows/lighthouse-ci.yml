@@ -60,7 +60,7 @@ jobs:
         run: |
           unzip $GITHUB_WORKSPACE/branch-name.zip
           BRANCH_NAME="$(cat branch-name)"
-          if [ "BRANCH_NAME" != "main" ]; then
+          if [ "$BRANCH_NAME" != "main" ]; then
               echo "WEBSITE_URL=https://$BRANCH_NAME.aleksac-me.pages.dev" >> $GITHUB_ENV
           fi
 
@@ -113,7 +113,7 @@ jobs:
         run: |
           unzip $GITHUB_WORKSPACE/branch-name.zip
           BRANCH_NAME="$(cat branch-name)"
-          if [ "BRANCH_NAME" != "main" ]; then
+          if [ "$BRANCH_NAME" != "main" ]; then
               echo "WEBSITE_URL=https://$BRANCH_NAME.aleksac-me.pages.dev" >> $GITHUB_ENV
           fi
 
