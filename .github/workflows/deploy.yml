@@ -1,6 +1,7 @@
 name: Deploy the website
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - "website/**.[tj]sx?"
