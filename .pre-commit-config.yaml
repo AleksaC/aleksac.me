@@ -23,7 +23,7 @@ repos:
           - json
 
   - repo: https://github.com/sirosen/check-jsonschema
-    rev: 0.20.0
+    rev: 0.21.0
     hooks:
       - id: check-github-workflows
 
@@ -50,7 +50,7 @@ repos:
         entry: pnpm --silent --prefix website typecheck
 
   - repo: https://github.com/errata-ai/vale
-    rev: 16d3a7f
+    rev: v2.23.0
     hooks:
       - id: vale
         types_or:
