@@ -1,5 +1,5 @@
 .share-button {
-  @apply bg-gray-300 flex justify-center items-center h-7 w-7 rounded-full;
+  @apply flex h-7 w-7 items-center justify-center rounded-full bg-gray-300;
 }
 
 :global(.dark) .share-button {

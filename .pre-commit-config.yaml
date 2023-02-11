@@ -19,7 +19,7 @@ repos:
           - jsx
           - ts
           - tsx
-          - scss
+          - css
           - json
 
   - repo: https://github.com/sirosen/check-jsonschema
