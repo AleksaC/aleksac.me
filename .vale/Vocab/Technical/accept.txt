@@ -31,3 +31,4 @@ js
 astro
 qwik
 preact
+cAdvisor
