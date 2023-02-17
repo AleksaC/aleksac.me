@@ -24,11 +24,13 @@ However many apps run multiple processes and there is no guarantee that the main
 process will get killed. This means that if your app uses multiple processes and
 doesn't monitor them properly one of them might get killed without you ever knowing.
 
-Unfortunately there doesn't seem to be a great way for catching these events. If
-you're using prometheus, you can use node exporter to collect `node_vmstat_oom_kill`
+If you're running kubernetes 1.24 or higher and using prometheus you can collect and
+create alerts on cAdvisor metric `container_oom_events_total`. If you're on an older
+version of kubernetes you can use node exporter to collect `node_vmstat_oom_kill`
 and set up alerts to let you know when a process gets OOM killed. However this will
 only tell you on which nodes it happened and you'd need to figure out in which
 container it happened (you can use `container_processes` cAdvisor metric for that).
-In addition to that, a naive implementation of the alert could add noise to your
+
+In either case, a naive implementation of the alerts could add noise to your
 container restart alerts in situations where the process that gets killed is the
 main process of the container.
