@@ -23,7 +23,7 @@ safer to use the [config file](https://kubernetes.io/docs/tasks/administer-clust
 The config file parameter we're looking to change is `cpuCFSQuota`. Since the managed
 node AMIs come with existing kubelet config we need to modify it. To do so we need
 to use user data of the launch template used for the node groups. To modify the
-
+the config file we can use `jq`:
 
 ```text
 MIME-Version: 1.0
