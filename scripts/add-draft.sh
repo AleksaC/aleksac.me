@@ -33,13 +33,21 @@ slugify () {
         | tr A-Z a-z
 }
 
+capitalize() {
+    echo "$(echo $1 | tr '[:lower:]' '[:upper:]' | cut -b1)${1:1}"
+}
+
+lowercase() {
+    echo $(echo $1 | tr '[:upper:]' '[:lower:]')
+}
+
 to_title_case() {
     local res=""
     for f in "$@"; do
         case $f in
             a|the|is|of|and|or|but|about|to|in|by) res+="${f} ";;
-            A|The|Is|Of|And|Or|But|About|To|In|By) res+="${f,,} ";;
-            *) res+="${f^} ";;
+            A|The|Is|Of|And|Or|But|About|To|In|By) res+="$(lowercase $f) ";;
+            *) res+="$(capitalize $f) ";;
         esac
     done
     # remove trailing whitespace
