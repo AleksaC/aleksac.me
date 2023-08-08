@@ -8,7 +8,7 @@ export const environments = {
 } as const;
 
 export const env = process.env
-  .NODE_ENV as typeof environments[keyof typeof environments];
+  .NODE_ENV as (typeof environments)[keyof typeof environments];
 assert(
   Object.values(environments).includes(env),
   `${env} is not a valid value for NODE_ENV. Must be one of: ${Object.values(
