@@ -13,5 +13,8 @@ information schema tables, so I checked to see if something like that is availab
 in clickhouse. Indeed it is, and here's the query to get the query behind a view:
 
 ```sql
-SELECT table_schema, table_name, view_definition FROM information_schema.views;
+SELECT
+  table_schema, table_name, view_definition
+FROM
+  information_schema.views;
 ```
