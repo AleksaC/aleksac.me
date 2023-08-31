@@ -42,8 +42,16 @@ lowercase() {
 }
 
 to_title_case() {
-    local res=""
-    for f in "$@"; do
+    local first rest
+    IFS=' ' read -r first rest <<< "$@"
+
+    # we always capitalize the first word
+    local res="$(capitalize $first) "
+    while IFS=' ' read -r f rest <<< "$rest"; do
+        if [ -z "${f}" ]; then
+            break
+        fi
+
         case $f in
             a|the|is|of|and|or|but|about|to|in|by) res+="${f} ";;
             A|The|Is|Of|And|Or|But|About|To|In|By) res+="$(lowercase $f) ";;
