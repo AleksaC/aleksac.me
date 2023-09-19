@@ -20,8 +20,8 @@ const copiedTooltip = `\
 const copyToClipboard = (preElement: HTMLElement) => {
   const toCopy: string[] = [];
 
-  preElement.childNodes.forEach((child, idx) => {
-    if (idx !== 0 && child.textContent) {
+  preElement.childNodes.forEach((child) => {
+    if (child.nodeName === "CODE" && child.textContent) {
       toCopy.push(child.textContent);
     }
   });
