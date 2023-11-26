@@ -37,3 +37,4 @@ AMI
 [Bb]ottlerocket
 (?i)TOML
 clickhouse
+UI

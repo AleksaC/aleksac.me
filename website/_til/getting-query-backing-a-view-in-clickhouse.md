@@ -18,3 +18,10 @@ SELECT
 FROM
   information_schema.views;
 ```
+
+**UPDATE**: There is an even better way to do what we want by using [`SHOW CREATE`](https://clickhouse.com/docs/en/sql-reference/statements/show#show-create-table--dictionary--view--database),
+which returns the create query that could be used to create the view:
+
+```sql
+SHOW CREATE VIEW <view_name>;
+```
