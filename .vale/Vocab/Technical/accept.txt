@@ -17,7 +17,7 @@ preload
 hostname
 (?i)ci
 dev
-ui
+(?i)ui
 repo
 nslookup
 rc
@@ -37,4 +37,6 @@ AMI
 [Bb]ottlerocket
 (?i)TOML
 clickhouse
-UI
+fastapi
+numpy
+pyc

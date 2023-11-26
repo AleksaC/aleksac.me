@@ -25,9 +25,19 @@ are caching. Since code doesn't change during container runtime (unless you are
 doing some weird stuff) this is unlikely to cause any problems and can be ruled
 out as a reason to disable bytecode caching in containers.
 
-The other obvious thing that comes to mind is the size of the cache files. Since
-we want to make our images as small as possible it may make sense not to store
-the cache files. However in most cases `PYTHONDONTWRITEBYTECODE` saves us nothing at all!
+Another potential issue is that pycs are not deterministic by default, which is
+explained in more detail and addressed by the [PEP-552](https://peps.python.org/pep-0552/).
+This can certainly be fixed by not generating the pycs at all but this can also be
+fixed by using a different validation mode (e.g. by setting `SOURCE_DATE_EPOCH`
+environment variable). In addition to that most people don't really care about
+perfect reproducibility in their image builds. They only build new images once
+when something changes, relying on cache from previous builds to avoid rebuilding
+layers whose dependencies didn't change.
+
+Finally the most likely motivation behind putting `PYTHONDONTWRITEBYTECODE` in
+dockerfiles is to reduce the size of the image. Since we want to make our images
+as small as possible it may make sense not to store the cache files.
+However in most cases `PYTHONDONTWRITEBYTECODE` saves us **NOTHING AT ALL!**
 
 ### pip doesn't care about this option
 
@@ -35,8 +45,8 @@ Since you usually aren't running your app during the build process, no `pyc` fil
 generated for your code. Now you need to peek into a freshly created vritualenv
 to see if they are generated for your dependencies during installation. If you
 do that you'll see that they indeed are and maybe your project has a lot of them,
-so eliminating them could surely shave off some MBs from your image. You'll be
-disappointed to find out that this doesn't happen with `PYTHONDONTWRITEBYTECODE=1`:
+so eliminating them could surely shave off some MBs from your image. However you'll
+be disappointed to find out that this doesn't happen when you set `PYTHONDONTWRITEBYTECODE=1`:
 
 ```shell
 export PYTHONDONTWRITEBYTECODE=1
@@ -49,29 +59,34 @@ find . **/django/**/*.pyc
 It should come as no surprise though, as pip doesn't generate the bytecode by importing the
 packages but by [explicitly compiling](https://github.com/pypa/pip/blob/a8ba0eec6ac3c1f6cf23f1e2e4c64954bd7a08ed/src/pip/_internal/operations/install/wheel.py#L615)
 them. To prevent this you can pass [`--no-compile`](https://pip.pypa.io/en/stable/cli/pip_install/#cmdoption-no-compile)
-flag to `pip install`. Poetry [doesn't have](https://github.com/python-poetry/poetry/issues/2288)
-a no-compile option so you'd need to export the lock file to `requirements.txt`
-and use pip with no-compile to avoid having `pyc` files for your deps. While
-using no-compile might make sense for some workloads, I don't think it's worth it
-in most cases, especially for web apps and soon you'll see why.
+flag to `pip install`. `poetry`, on the other hand, does the opposite by default
+since version `1.4.0` (prior to that version you had [no way](https://github.com/python-poetry/poetry/issues/2288)
+of preventing it from generating the pycs) and instead exposes a [`--compile`](`https://python-poetry.org/docs/cli/#options-2`)
+flag to perform the compilation.
 
 ### How much does it save you
 
-This varies widely but if you are prudent with your usage of dependencies it should
-be less than 1MB. I tested this on the largest project from work and the difference
-was 2Mb (from 500Mb to 498Mb).
+As explained above, `PYTHONDONTWRITEBYTECODE` doesn't save you anything, but
+running `pip install` with `--no-compile` or a regular poetry install will net
+you decent savings on a decently-sized project. For example on an 18K LOC fastapi
+monolith I have at work, running poetry install without `--compile` saves `63MB`,
+which is almost a 15% reduction in image size. This obviously doesn't come for
+free, so let's explore the downsides.
 
 ### How it hurts you
 
-Disabling bytecode caching means the modules need to be compiled during import time.
+Not generating means the modules need to be compiled during import time.
 Since most imports occur at startup this means that disabling bytecode caching
 mostly impacts the startup of the application. This is especially bad if you are
 using a pre-fork WSGI server like [Gunicorn](https://gunicorn.org/) without [preloading](https://docs.gunicorn.org/en/stable/settings.html#preload-app)
 the app because each worker will need to go through the full compilation process,
 wasting CPU cycles and slowing down the worker startup. It will also impact worker
 restarts if you used something like gunicorn [max-requests](https://docs.gunicorn.org/en/stable/settings.html#max-requests)
-in your config. Since timeout for gunicorn workers applies to their startup as well,
-you may even have workers timing out on startup!
+in your config. Another issue is that some dependencies may not be imported during
+the app startup, leading to them being imported when the first request hits a route
+that uses them leading to unexpected latency spikes. Heavy dependencies like
+pandas and numpy which take ages to import even with the bytecode cache compiled,
+can easily add a couple of seconds to the action that first triggered their import.
 
 ### TL;DR
 
