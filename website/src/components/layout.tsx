@@ -18,13 +18,6 @@ const Layout: FC<{ meta?: Record<string, string> }> = ({
         <Header />
         <main className="mx-auto max-w-6xl px-5">
           <div>{children}</div>
-          <div className="my-10 text-center">
-            🚧
-            <span className="px-2 text-sm italic">
-              The website is still under construction!
-            </span>
-            🚧
-          </div>
         </main>
         <GoToTopButton />
       </div>
