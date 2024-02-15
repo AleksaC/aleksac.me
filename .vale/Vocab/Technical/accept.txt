@@ -24,7 +24,7 @@ rc
 pnpm
 [cC][pP]ython
 MB
-github
+[Gg]it[Hh]ub
 cloudflare
 prefetch
 js
