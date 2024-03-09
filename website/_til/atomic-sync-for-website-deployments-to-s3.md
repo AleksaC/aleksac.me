@@ -8,7 +8,7 @@ and Netlify, an S3 bucket with a CDN in front of it is still a good choice for
 hosting a static website.
 
 Deploying to S3 is very simple and effectively boils down to a variation of the
-following aws cli command:
+following AWS CLI command:
 
 ```shell
 aws s3 sync <website> s3://<bucket>

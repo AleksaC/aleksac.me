@@ -24,6 +24,7 @@
     @apply px-1.5;
     @apply rounded-md;
     @apply whitespace-pre;
+    @apply text-sm;
   }
 
   blockquote {
