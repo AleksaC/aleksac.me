@@ -3,7 +3,7 @@ name: Lighthouse CI
 on:
   workflow_run:
     workflows:
-      - Deploy the website
+      - Deploy
     types:
       - completed
 
