@@ -45,3 +45,4 @@ pyc
 (?i)html
 [Vv]ite
 Netlify
+hugo
