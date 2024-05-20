@@ -63,8 +63,8 @@ jobs:
 
       - name: Run linting & type checking
         run: |
-          yarn typecheck
-          yarn lint-ci
+          pnpm typecheck
+          pnpm lint-ci
 
       - name: Set up next build cache
         uses: actions/cache@v4
