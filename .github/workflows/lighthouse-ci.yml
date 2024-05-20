@@ -19,13 +19,13 @@ jobs:
     env:
       LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
     steps:
-      - uses: actions/checkout@v3.3.0
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v3.6.0
+      - uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "22"
 
-      - uses: actions/cache@v3.2.3
+      - uses: actions/cache@v4
         with:
           path: ~/.npm/_npx
           key: npx-${{ runner.os }}-${{ github.run_id }}
@@ -34,7 +34,7 @@ jobs:
 
       # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#using-data-from-the-triggering-workflow
       - name: Download artifact
-        uses: actions/github-script@v6.4.0
+        uses: actions/github-script@v6
         with:
           script: |
             let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
@@ -77,20 +77,20 @@ jobs:
     env:
       LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
     steps:
-      - uses: actions/checkout@v3.3.0
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v3.6.0
+      - uses: actions/setup-node@v4
         with:
           node-version: "18"
 
-      - uses: actions/cache@v3.2.3
+      - uses: actions/cache@v4
         with:
           path: ~/.npm/_npx
           key: npx-${{ runner.os }}-${{ github.run_id }}
           restore-keys: |
             npx-${{ runner.os }}
 
-      - uses: actions/github-script@v6.4.0
+      - uses: actions/github-script@v6
         with:
           script: |
             let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
