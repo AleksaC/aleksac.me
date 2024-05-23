@@ -12,7 +12,7 @@ export default class MyDocument extends Document {
               __html: `
               if (localStorage.getItem(
                 "${THEME_KEY}") === "dark" ||
-                (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)
+                (!("${THEME_KEY}" in localStorage) && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)
               ) {
                 document.documentElement.classList.add("dark");
                 localStorage.setItem("${THEME_KEY}", "dark");
