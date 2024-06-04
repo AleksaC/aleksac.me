@@ -36,6 +36,10 @@ build: .next public/sitemap.xml public/feed.xml
 analyze: install
 	$(NPM) run analyze
 
+.PHONY: format
+format:
+	@pre-commit run prettier --all-files
+
 .PHONY: lint
 lint:
 	$(NPM) run lint
