@@ -13,7 +13,6 @@ defaults:
     working-directory: website
 
 jobs:
-# TODO: create reusable job for mobile and desktop
   ligthouse-ci-mobile:
     runs-on: ubuntu-22.04
     env:
