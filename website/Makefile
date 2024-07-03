@@ -56,6 +56,10 @@ pre-commit: export SKIP = eslint,tsc
 pre-commit:
 	@pre-commit run --all-files
 
+.PHONY: spellcheck
+spellcheck:
+	@pre-commit run vale --all-files
+
 .PHONY: serve
 serve: build
 	$(NPM) run start
