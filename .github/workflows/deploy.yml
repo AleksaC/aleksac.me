@@ -6,6 +6,7 @@ on:
     paths:
       - "website/**.[tj]sx?"
       - "website/**.css"
+      - "website/public/**"
       - "website/**.md"
       - "website/package.json"
       - "website/pnpm-lock.yaml"
@@ -17,6 +18,7 @@ on:
     paths:
       - "website/**.[tj]sx?"
       - "website/**.css"
+      - "website/public/**"
       - "website/**.md"
       - "website/package.json"
       - "website/pnpm-lock.yaml"
