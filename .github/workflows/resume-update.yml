@@ -4,7 +4,7 @@ on:
   pull_request:
   workflow_dispatch:
   repository_dispatch:
-    types: [resume_update]
+    # types: [resume_update]
 
 defaults:
   run:
