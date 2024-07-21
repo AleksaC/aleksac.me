@@ -1,0 +1,34 @@
+name: Resume update
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [resume_update]
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update resume
+        run: |
+          git clone https://github.com/AleksaC/resume /tmp/resume
+          cp /tmp/resume/resume.pdf .
+
+      # - name: Configure git
+      #   run: |
+      #     git config --global user.name 'Github Actions'
+      #     git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+      # - name: Push changes
+      #   run: |
+      #     git add resume.pdf
+      #     git commit -m "Update resume.pdf"
+      #     git push origin main
