@@ -21,7 +21,7 @@ jobs:
       - name: Update resume
         run: |
           git clone https://github.com/AleksaC/resume /tmp/resume
-          cp /tmp/resume/resume.pdf .
+          cp /tmp/resume/resume.pdf ./website/public/
 
       # - name: Configure git
       #   run: |
