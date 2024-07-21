@@ -30,6 +30,6 @@ jobs:
 
       - name: Push changes
         run: |
-          git add resume.pdf
+          git add ./website/public/resume.pdf
           git commit -m "Update resume.pdf"
           git push --dry-run origin main
