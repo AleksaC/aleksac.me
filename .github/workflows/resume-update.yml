@@ -4,7 +4,7 @@ on:
   pull_request:
   workflow_dispatch:
   repository_dispatch:
-    # types: [resume_update]
+    types: ["resume-update"]
 
 defaults:
   run:
@@ -34,4 +34,4 @@ jobs:
         run: |
           git add ./website/public/resume.pdf
           git commit -m "Update resume.pdf"
-          git push --dry-run origin main
+          git push origin main
