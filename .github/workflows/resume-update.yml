@@ -24,6 +24,7 @@ jobs:
         run: |
           git clone https://github.com/AleksaC/resume /tmp/resume
           cp /tmp/resume/resume.pdf ./website/public/
+          git status
 
       - name: Configure git
         run: |
@@ -33,5 +34,6 @@ jobs:
       - name: Push changes
         run: |
           git add ./website/public/resume.pdf
+          git status
           git commit -m "Update resume.pdf"
           git push origin main
