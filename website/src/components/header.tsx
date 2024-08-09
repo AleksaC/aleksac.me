@@ -3,9 +3,9 @@ import classNames from "classnames";
 import { useRouter } from "next/router";
 import { useState, FC } from "react";
 
-import ThemeToggle from "@components/themeToggle";
-import socialMedia from "@constants/social-media";
-import RssIcon from "@components/icons/rss";
+import ThemeToggle from "@/components/themeToggle";
+import socialMedia from "@/constants/social-media";
+import RssIcon from "@/components/icons/rss";
 
 type Route = {
   name: string;

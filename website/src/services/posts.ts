@@ -4,7 +4,7 @@ import { join } from "path";
 import matter from "gray-matter";
 import { parseISO, format } from "date-fns";
 
-import { env, environments } from "@config";
+import { env, environments } from "@/config";
 
 const blogPostsDirectory = join(process.cwd(), "_posts");
 const tilPostsDirectory = join(process.cwd(), "_til");

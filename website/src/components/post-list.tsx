@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { Post as PostType } from "@typing/post";
+import { Post as PostType } from "@/types/post";
 
 type Props = {
   posts: (Pick<PostType, "title" | "date" | "dateFormatted" | "slug"> & {

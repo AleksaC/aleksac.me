@@ -1,7 +1,7 @@
-import InstagramIcon from "@components/icons/instagram";
-import LinkedinIcon from "@components/icons/linkedin";
-import TwitterIcon from "@components/icons/twitter";
-import GithubIcon from "@components/icons/github";
+import InstagramIcon from "@/components/icons/instagram";
+import LinkedinIcon from "@/components/icons/linkedin";
+import TwitterIcon from "@/components/icons/twitter";
+import GithubIcon from "@/components/icons/github";
 
 export default {
   GITHUB: {

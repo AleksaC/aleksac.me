@@ -1,5 +1,5 @@
 /* eslint-disable node/no-process-env */
-import { assert, stripTrailingSlash, strToBool } from "@utils";
+import { assert, stripTrailingSlash, strToBool } from "@/utils";
 
 export const environments = {
   PROD: "production",

@@ -1,6 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
 
-import { THEME_KEY } from "@constants/theme";
+import { THEME_KEY } from "@/constants/theme";
 
 export default class MyDocument extends Document {
   render() {

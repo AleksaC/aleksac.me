@@ -3,12 +3,12 @@ import fs from "fs";
 import Head from "next/head";
 import RSS from "rss";
 
-import Layout from "@components/layout";
-import socialMedia from "@constants/social-media";
-import { formatTitle } from "@utils/title-formatter";
-import { BlogPostsService, TilPostsService } from "@services/posts";
-import { GENERATE_RSS, GENERATE_SITEMAP, WEBSITE_URL } from "@config";
-import { DESCRIPTION } from "@constants/meta";
+import Layout from "@/components/layout";
+import socialMedia from "@/constants/social-media";
+import { formatTitle } from "@/utils/title-formatter";
+import { BlogPostsService, TilPostsService } from "@/services/posts";
+import { GENERATE_RSS, GENERATE_SITEMAP, WEBSITE_URL } from "@/config";
+import { DESCRIPTION } from "@/constants/meta";
 
 const Index = () => {
   return (

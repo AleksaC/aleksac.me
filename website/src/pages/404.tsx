@@ -3,8 +3,8 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import Layout from "@components/layout";
-import { formatTitle } from "@utils/title-formatter";
+import Layout from "@/components/layout";
+import { formatTitle } from "@/utils/title-formatter";
 
 const NotFoundPage: FC = () => {
   const router = useRouter();

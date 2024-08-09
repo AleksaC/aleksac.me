@@ -4,11 +4,11 @@ import "highlight.js/styles/github-dark-dimmed.css";
 import { FC } from "react";
 import Head from "next/head";
 
-import PostComponent from "@components/post";
-import markdownToHtml from "@lib/markdownToHtml";
-import { Post as PostType } from "@typing/post";
-import { BlogPostsService } from "@services/posts";
-import { WEBSITE_URL } from "@config";
+import PostComponent from "@/components/post";
+import markdownToHtml from "@/lib/markdownToHtml";
+import { Post as PostType } from "@/types/post";
+import { BlogPostsService } from "@/services/posts";
+import { WEBSITE_URL } from "@/config";
 
 const Post: FC<{ post: PostType }> = ({ post }) => {
   return (

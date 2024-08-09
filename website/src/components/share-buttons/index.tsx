@@ -3,10 +3,10 @@ import { useState } from "react";
 
 import shareButtonStyles from "./share-buttons.module.css";
 
-import FacebookIcon from "@components/icons/facebook";
-import LinkedinIcon from "@components/icons/linkedin";
-import TwitterIcon from "@components/icons/twitter";
-import CopyIcon from "@components/icons/copy";
+import FacebookIcon from "@/components/icons/facebook";
+import LinkedinIcon from "@/components/icons/linkedin";
+import TwitterIcon from "@/components/icons/twitter";
+import CopyIcon from "@/components/icons/copy";
 
 function getEncodedHref() {
   return encodeURIComponent(window.location.href);

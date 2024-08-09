@@ -1,12 +1,12 @@
 import Head from "next/head";
 
-import Layout from "@components/layout";
-import { BlogPostsService } from "@services/posts";
-import { Post } from "@typing/post";
-import { formatTitle } from "@utils/title-formatter";
-import PostList from "@components/post-list";
-import Intro from "@components/intro";
-import { WEBSITE_URL } from "@config";
+import Layout from "@/components/layout";
+import { BlogPostsService } from "@/services/posts";
+import { Post } from "@/types/post";
+import { formatTitle } from "@/utils/title-formatter";
+import PostList from "@/components/post-list";
+import Intro from "@/components/intro";
+import { WEBSITE_URL } from "@/config";
 
 type Props = {
   posts: Post[];

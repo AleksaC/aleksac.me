@@ -1,4 +1,4 @@
-import { WEBSITE_URL } from "@config";
+import { WEBSITE_URL } from "@/config";
 
 export const TITLE = "Aleksa Cukovic";
 

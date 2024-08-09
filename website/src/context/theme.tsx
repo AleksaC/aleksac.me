@@ -9,7 +9,7 @@ import {
   useRef,
 } from "react";
 
-import { Theme, THEME_KEY } from "@constants/theme";
+import { Theme, THEME_KEY } from "@/constants/theme";
 
 type ThemeContextType = {
   theme: Theme;

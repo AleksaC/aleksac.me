@@ -1,5 +1,5 @@
-import { Theme } from "@constants/theme";
-import { useTheme } from "@context/theme";
+import { Theme } from "@/constants/theme";
+import { useTheme } from "@/context/theme";
 
 const SunIcon = () => {
   return (

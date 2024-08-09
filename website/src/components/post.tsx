@@ -4,12 +4,12 @@ import Link from "next/link";
 
 import markdownStyles from "./markdown-styles.module.css";
 
-import Layout from "@components/layout";
-import { formatTitle } from "@utils/title-formatter";
-import ProgressBar from "@components/progress-bar";
-import ShareButtons from "@components/share-buttons";
-import { Post as PostType } from "@typing/post";
-import { useCodeCopyButtons } from "@hooks/copy-buttons";
+import Layout from "@/components/layout";
+import { formatTitle } from "@/utils/title-formatter";
+import ProgressBar from "@/components/progress-bar";
+import ShareButtons from "@/components/share-buttons";
+import { Post as PostType } from "@/types/post";
+import { useCodeCopyButtons } from "@/hooks/copy-buttons";
 
 const PostBody: FC<{ content: string }> = ({ content }) => {
   const postBody: MutableRefObject<HTMLDivElement | null> = useRef(null);
