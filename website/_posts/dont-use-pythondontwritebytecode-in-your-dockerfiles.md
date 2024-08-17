@@ -61,7 +61,7 @@ packages but by [explicitly compiling](https://github.com/pypa/pip/blob/a8ba0eec
 them. To prevent this you can pass [`--no-compile`](https://pip.pypa.io/en/stable/cli/pip_install/#cmdoption-no-compile)
 flag to `pip install`. `poetry`, on the other hand, does the opposite by default
 since version `1.4.0` (prior to that version you had [no way](https://github.com/python-poetry/poetry/issues/2288)
-of preventing it from generating the pycs) and instead exposes a [`--compile`](`https://python-poetry.org/docs/cli/#options-2`)
+of preventing it from generating the pycs) and instead exposes a [`--compile`](https://python-poetry.org/docs/cli/#options-2)
 flag to perform the compilation.
 
 ### How much does it save you
