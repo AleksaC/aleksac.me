@@ -18,7 +18,10 @@ const { posts } = Astro.props;
       posts.map(({ slug, data: { title, date, description } }) => (
         <div class="mx-auto max-w-3xl bg-gray-100 p-4 pb-4 dark:bg-[#1e2022] dark:bg-opacity-80">
           <h2 class="text-xl font-bold leading-snug md:text-3xl">
-            <a class="hover:underline" href={`${join(Astro.url.pathname, slug)}/`}>
+            <a
+              class="hover:underline"
+              href={`${join(Astro.url.pathname, slug)}/`}
+            >
               {title}
             </a>
           </h2>
