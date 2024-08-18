@@ -18,6 +18,9 @@ if (process.env.ANALYZE && process.env.ANALYZE.toLowerCase() === "true") {
 
 // https://astro.build/config
 export default defineConfig({
+  build: {
+    format: "file",
+  },
   markdown: {
     rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings],
   },
