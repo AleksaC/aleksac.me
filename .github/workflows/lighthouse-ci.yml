@@ -1,11 +1,14 @@
 name: Lighthouse CI
 
 on:
-  workflow_run:
-    workflows:
-      - Deploy
-    types:
-      - completed
+  push:
+    branches:
+      - astro-rewrite
+  # workflow_run:
+  #   workflows:
+  #     - Deploy
+  #   types:
+  #     - completed
 
 defaults:
   run:
