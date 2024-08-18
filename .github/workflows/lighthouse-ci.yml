@@ -64,7 +64,7 @@ jobs:
           # unzip $GITHUB_WORKSPACE/branch-name.zip
           BRANCH_NAME="$(cat branch-name)"
 
-          ehco $BRANCH_NAME
+          echo $BRANCH_NAME
 
           if [ "$BRANCH_NAME" != "main" ]; then
               export "WEBSITE_URL=https://$BRANCH_NAME.aleksac-me.pages.dev"
