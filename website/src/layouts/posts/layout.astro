@@ -1,0 +1,20 @@
+---
+import PostList from "./post-list.astro";
+import BaseLayout from "../base/layout.astro";
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  title: string;
+  posts: CollectionEntry<"blog">[] | CollectionEntry<"til">[];
+};
+
+const { title, posts } = Astro.props;
+---
+
+<BaseLayout title={title}>
+  <div class="mx-auto max-w-3xl">
+    <h1 class="pb-4 text-3xl font-bold md:pb-6 md:text-5xl">{title}</h1>
+    <div class="mb-8 md:mb-10"><slot /></div>
+  </div>
+  <PostList posts={posts} />
+</BaseLayout>

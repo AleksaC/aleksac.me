@@ -10,6 +10,8 @@ const prefix = process.env.WEBSITE_URL || "http://localhost:3000";
 const isPreview = str2Bool(process.env.PREVIEW || "false");
 const deviceType = process.env.DEVICE_TYPE || "mobile";
 
+// TODO: see if ESM modules/typescript can be used
+// TODO: test & update
 module.exports = {
   ci: {
     collect: {

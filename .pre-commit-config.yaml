@@ -7,49 +7,33 @@ repos:
       - id: check-yaml
 
   - repo: https://github.com/sirosen/check-jsonschema
-    rev: 0.28.4
+    rev: 0.29.1
     hooks:
       - id: check-github-workflows
 
   - repo: local
     hooks:
-      - id: eslint
-        name: eslint
-        language: system
-        types_or:
-          - javascript
-          - jsx
-          - ts
-          - tsx
-        # skip this hook when running with --all-files
-        entry: scripts/eslint-pre-commit.sh
-
-      - id: tsc
-        name: type-checking
-        language: system
-        pass_filenames: false
-        types_or:
-          - ts
-          - tsx
-        entry: pnpm --silent --prefix website typecheck
-
+      # TODO: fix
       - id: prettier
         name: prettier
         language: node
-        entry: prettier --write --cache
+        files: \.([tj]sx?|astro)$
         additional_dependencies:
           - prettier@v3.3.3
           - prettier-plugin-tailwindcss@0.6.6
-        types_or:
-          - javascript
-          - jsx
-          - ts
-          - tsx
-          - css
-          - json
+          - prettier-plugin-astro@0.14.1
+        entry: prettier --cache --write
+
+      - id: astro-check
+        name: astro check
+        language: system
+        pass_filenames: false
+        files: \.([tj]sx?|astro)$
+        exclude: website.*
+        entry: pnpm --silent --prefix personal-website astro check
 
   - repo: https://github.com/errata-ai/vale
-    rev: v3.4.2
+    rev: v3.7.0
     hooks:
       - id: vale
         types_or:

@@ -1,0 +1,35 @@
+<div
+  class="fixed left-0 top-0 z-10 h-1 rounded-r-sm bg-black dark:bg-whiteish"
+  data-progress-bar
+>
+</div>
+
+<script>
+  const setUpProgressBar = () => {
+    const html = document.documentElement;
+    const progressBar = document.querySelector<HTMLEmbedElement>(
+      "[data-progress-bar]"
+    );
+
+    const updateProgressBar = () => {
+      if (progressBar) {
+        progressBar.style.width = `${(100 * html.scrollTop) / (html.scrollHeight - html.clientHeight)}%`;
+      }
+    };
+
+    window.addEventListener("scroll", updateProgressBar, { passive: true });
+
+    return () => window.removeEventListener("scroll", updateProgressBar);
+  };
+
+  let cleanUp = setUpProgressBar();
+
+  const observer = new MutationObserver(() => {
+    cleanUp();
+    cleanUp = setUpProgressBar();
+  });
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: false,
+  });
+</script>

@@ -1,0 +1,21 @@
+---
+import Posts from "@/layouts/posts/layout.astro";
+import { getSortedCollection } from "@/utils/collections";
+
+const posts = await getSortedCollection("blog");
+---
+
+<Posts title={"Blog"} posts={posts}>
+  This blog is an attempt to reshape my notes and ideas into somtehing that can
+  be helpful to others, as well as clear enough so that I can get useful
+  feedback on it and maybe even good enough to get me some clout.
+  <br />
+  <br />
+  Majority of the posts here are about software engineering. While I don't have a
+  target audience most of the stuff should resonate with somewhat experienced software
+  engineers.
+  <br />
+  <br />
+  When it comes to post titles and descriptions I try to word them in a way that
+  I think would maximize engagement while not meaningfully misrepresenting the content.
+</Posts>

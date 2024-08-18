@@ -1,0 +1,109 @@
+---
+import FacebookIcon from "@/components/icons/facebook.astro";
+import LinkedinIcon from "@/components/icons/linkedin.astro";
+import TwitterIcon from "@/components/icons/twitter.astro";
+import CopyIcon from "@/components/icons/copy.astro";
+---
+
+<div class="relative flex space-x-4" data-share-buttons>
+  <button class="share-button" title="Share on Facebook" data-share-facebook>
+    <FacebookIcon />
+  </button>
+  <button class="share-button" title="Share on LinkedIn" data-share-linkedin>
+    <LinkedinIcon />
+  </button>
+  <button class="share-button" title="Share on Twitter" data-share-twitter>
+    <TwitterIcon />
+  </button>
+  <button class="share-button" title="Copy URL" data-share-copy-url>
+    <CopyIcon />
+  </button>
+  <div
+    class={"absolute -top-8 right-1 flex-col items-end hidden"}
+    data-url-copied-tooltip
+  >
+    <div class="top-0 rounded-sm bg-black px-2 py-1 text-xs text-white">
+      URL Copied
+    </div>
+    <div
+      class="mr-1 h-0 w-0 border-l-[6px] border-r-[6px] border-t-[8px] border-black border-l-transparent border-r-transparent"
+    >
+    </div>
+  </div>
+</div>
+
+<style>
+  .share-button {
+    @apply flex h-7 w-7 items-center justify-center rounded-full bg-gray-300;
+  }
+
+  :global(.dark) .share-button {
+    @apply bg-[#2F3336];
+  }
+</style>
+
+<script>
+  const getEncodedHref = () => encodeURIComponent(window.location.href);
+
+  const setUpEventListeners = () => {
+    const shareButtonsComponents = document.querySelectorAll(
+      "[data-share-buttons]"
+    );
+
+    shareButtonsComponents.forEach((shareButtonsComponent) => {
+      shareButtonsComponent
+        .querySelector("button[data-share-facebook]")
+        ?.addEventListener("click", () => {
+          window.open(
+            `https://www.facebook.com/sharer/sharer.php?u=${getEncodedHref()}`
+          );
+        });
+
+      shareButtonsComponent
+        .querySelector("button[data-share-linkedin]")
+        ?.addEventListener("click", () => {
+          window.open(
+            `https://www.linkedin.com/sharing/share-offsite/?url=${getEncodedHref()}`
+          );
+        });
+
+      shareButtonsComponent
+        .querySelector("button[data-share-twitter]")
+        ?.addEventListener("click", () => {
+          window.open(
+            `https://twitter.com/intent/tweet?url=${getEncodedHref()}`
+          );
+        });
+
+      let copiedTooltipClearTimeout: ReturnType<typeof setTimeout> | undefined;
+
+      shareButtonsComponent
+        .querySelector<HTMLButtonElement>("button[data-share-copy-url]")
+        ?.addEventListener("click", async () => {
+          await navigator.clipboard.writeText(window.location.href);
+
+          const copiedTooltip = shareButtonsComponent.querySelector(
+            "[data-url-copied-tooltip]"
+          );
+          copiedTooltip?.classList.replace("hidden", "flex");
+          if (copiedTooltipClearTimeout) {
+            clearTimeout(copiedTooltipClearTimeout);
+          }
+
+          copiedTooltipClearTimeout = setTimeout(
+            () => copiedTooltip?.classList.replace("flex", "hidden"),
+            750
+          );
+        });
+    });
+  };
+
+  setUpEventListeners();
+
+  // MutationObserver is used to set up listeners on clientside routing
+  const observer = new MutationObserver(setUpEventListeners);
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: false,
+  });
+</script>

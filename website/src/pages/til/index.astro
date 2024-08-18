@@ -1,0 +1,18 @@
+---
+import Posts from "@/layouts/posts/layout.astro";
+import { getSortedCollection } from "@/utils/collections";
+
+const posts = await getSortedCollection("til");
+---
+
+<Posts title="Today I Learned" posts={posts}>
+  TIL stands for today I learned. Here I'll share small nuggets of knowledge as
+  I collect them. Most of the stuff here is in the form of advice or reusable
+  snippets and can be digested in a couple of minutes.
+  <br />
+  <br />
+  As with blog, majority of the posts here are related to software development and
+  tech in general. Unlike blog posts, many posts here present no new information
+  but rather highlight a piece of information that may be less prominent in other
+  sources (e.g. documentation of a project).
+</Posts>

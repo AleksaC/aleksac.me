@@ -1,22 +1,22 @@
-import InstagramIcon from "@/components/icons/instagram";
-import LinkedinIcon from "@/components/icons/linkedin";
-import TwitterIcon from "@/components/icons/twitter";
-import GithubIcon from "@/components/icons/github";
+import InstagramIcon from "@/components/icons/instagram.astro";
+import LinkedinIcon from "@/components/icons/linkedin.astro";
+import TwitterIcon from "@/components/icons/twitter.astro";
+import GithubIcon from "@/components/icons/github.astro";
 
-export default {
-  GITHUB: {
+export const SOCIAL_MEDIA = {
+  github: {
     icon: GithubIcon,
     link: "https://github.com/AleksaC",
   },
-  TWITTER: {
+  twitter: {
     icon: TwitterIcon,
     link: "https://twitter.com/Aleksa_C_",
   },
-  INSTAGRAM: {
+  instagram: {
     icon: InstagramIcon,
     link: "https://www.instagram.com/__aleksa_c/",
   },
-  LINKEDIN: {
+  linkedin: {
     icon: LinkedinIcon,
     link: "https://www.linkedin.com/in/aleksa-cukovic/",
   },

@@ -1,0 +1,57 @@
+<button
+  class={"fixed bottom-8 right-6 rounded-md border border-black bg-white bg-opacity-80 px-1 py-0.5 dark:border-whiteish dark:bg-blackish dark:bg-opacity-80 hidden"}
+  aria-label="go to top"
+  data-go-to-top
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke-width={1.5}
+    stroke="currentColor"
+    class="h-6 w-6"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
+  </svg>
+</button>
+
+<script>
+  const setUpGoToTopButton = () => {
+    const goToTopButton = document.querySelector("button[data-go-to-top]");
+
+    goToTopButton?.addEventListener("click", () =>
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    );
+
+    const visibilityToggle = () => {
+      const scrollTop =
+        document.body.scrollTop || document.documentElement.scrollTop;
+
+      const hidden = goToTopButton?.classList.contains("hidden");
+
+      if (hidden && scrollTop >= 20) {
+        goToTopButton?.classList.remove("hidden");
+      } else if (!hidden && scrollTop < 20) {
+        goToTopButton?.classList.add("hidden");
+      }
+    };
+
+    window.addEventListener("scroll", visibilityToggle, { passive: true });
+
+    return () => window.removeEventListener("scroll", visibilityToggle);
+  };
+
+  let cleanUp = setUpGoToTopButton();
+
+  const observer = new MutationObserver(() => {
+    cleanUp();
+    cleanUp = setUpGoToTopButton();
+  });
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: false,
+  });
+</script>
