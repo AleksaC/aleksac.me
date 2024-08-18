@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # rollup bundle analyzer
 stats.html
+
+#lighthouse ci
+.lighthouseci

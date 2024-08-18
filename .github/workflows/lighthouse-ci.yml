@@ -57,21 +57,17 @@ jobs:
         env:
           WEBSITE_URL: https://aleksac.me
         run: |
-          export WEBSITE_URL="https://aleksac.me"
-
           unzip $GITHUB_WORKSPACE/branch-name.zip
           BRANCH_NAME="$(cat branch-name)"
-
-          echo "$BRANCH_NAME"
 
           if [ "$BRANCH_NAME" != "main" ]; then
               export "WEBSITE_URL=https://$BRANCH_NAME.aleksac-me.pages.dev"
               export PREVIEW=true
           fi
 
-          npx @lhci/cli@0.10.0 collect
-          npx @lhci/cli@0.10.0 upload --githubStatusContextSuffix /mobile
-          npx @lhci/cli@0.10.0 assert
+          npx @lhci/cli@0.14.0 collect
+          npx @lhci/cli@0.14.0 upload --githubStatusContextSuffix /mobile
+          npx @lhci/cli@0.14.0 assert
 
   ligthouse-ci-desktop:
     runs-on: ubuntu-22.04
@@ -113,9 +109,9 @@ jobs:
 
       - name: Run lighthouse ci for desktop
         if: always()
+        env:
+          WEBSITE_URL: https://aleksac.me
         run: |
-          export WEBSITE_URL="https://aleksac.me"
-
           unzip $GITHUB_WORKSPACE/branch-name.zip
           BRANCH_NAME="$(cat branch-name)"
 
@@ -124,6 +120,6 @@ jobs:
               export PREVIEW=true
           fi
 
-          DEVICE_TYPE=desktop npx @lhci/cli@0.10.0 collect
-          npx @lhci/cli@0.10.0 upload --githubStatusContextSuffix /desktop
-          npx @lhci/cli@0.10.0 assert
+          DEVICE_TYPE=desktop npx @lhci/cli@0.14.0 collect
+          npx @lhci/cli@0.14.0 upload --githubStatusContextSuffix /desktop
+          npx @lhci/cli@0.14.0 assert

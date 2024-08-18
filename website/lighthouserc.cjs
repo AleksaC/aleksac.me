@@ -1,17 +1,29 @@
 /* eslint-disable node/no-process-env */
 
-const urls = ["/", "/blog", "/til"];
+const fs = require("fs");
+const path = require("path");
+
+const stripSuffix = (str) => path.parse(str).name;
+
+const posts = [
+  ...fs
+    .readdirSync("src/content/blog")
+    .map((post) => `/blog/${stripSuffix(post)}/`),
+  ...fs
+    .readdirSync("src/content/til")
+    .map((post) => `/til/${stripSuffix(post)}/`),
+];
+
+const urls = ["/", "/blog/", "/til/", ...posts];
 
 const str2Bool = (str) =>
   str.toLowerCase() in
   ["true", "1", "y", "yes"].reduce((o, k) => ({ ...o, [k]: null }), {});
 
-const prefix = process.env.WEBSITE_URL || "http://localhost:4321";
+const prefix = process.env.WEBSITE_URL || "http://127.0.0.1:4321";
 const isPreview = str2Bool(process.env.PREVIEW || "false");
 const deviceType = process.env.DEVICE_TYPE || "mobile";
 
-// TODO: see if ESM modules/typescript can be used
-// TODO: test & update
 module.exports = {
   ci: {
     collect: {
@@ -34,18 +46,11 @@ module.exports = {
       preset: "lighthouse:no-pwa",
       assertions: {
         "is-crawlable": isPreview ? "off" : "error",
+        // we need theme setter to be render-blocking to prevent flicker
+        "render-blocking-resources": ["error", { maxLength: 1 }],
         // since this is a static website with no user input and no third party
         // scripts at the moment adding csp is more trouble than it's worth
         "csp-xss": "off",
-        // Next seems to add touchstart event listeners to anchor tags (since version 12.3)
-        // so we will alway have this error and since it's not worth downgrading
-        // the Next version for this rule there is no point in keeping it.
-        // Also the problem is not with next per se but in next + preact as preact
-        // doesn't add passive event listeners. There is a draft PR for adding this
-        // but according to the following comment browsers treat event listeners
-        // as passive anyway so it isn't needed
-        // https://github.com/preactjs/preact/pull/3769#issuecomment-1281134132
-        "uses-passive-event-listeners": "off",
       },
     },
   },
