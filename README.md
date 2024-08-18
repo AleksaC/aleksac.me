@@ -9,12 +9,12 @@ Code behind my personal website, [aleksac.me](https://aleksac.me).
 
 ## About
 
-The webiste is built using [Astro](https://github.com/withastro/astro), without
+The website is built using [Astro](https://github.com/withastro/astro), without
 additional frameworks like React.
 
 The first version of the website was built with [Next.js](https://github.com/vercel/next.js)
 and [Preact](https://preactjs.com/). This was before Next 13, which introduced
-some major changes. It wasn't easy for upgrade the version, and preact compat was
+some major changes. It wasn't easy for upgrade the version, and Preact compat was
 no longer supported.
 
 Since Next.js was moving in a completely different direction from the stuff I needed
@@ -26,7 +26,7 @@ for in a new framework were:
 - decent level of adoption
 
 Astro fit these perfectly, and the rewrite process was going smoothly for a subset
-of functionallity, so I decided to do a full rewrite.
+of functionality, so I decided to do a full rewrite.
 
 ### Getting started
 
@@ -68,7 +68,7 @@ This gets me:
 
 at the cost of:
 
-- spending a little time writing and maintaing the GitHub workflow
+- spending a little time writing and maintaining the GitHub workflow
 
 ## Contact
 - [Personal website](https://aleksac.me)
