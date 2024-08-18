@@ -7,8 +7,8 @@ export async function GET() {
 
   const paths = [
     "",
-    "blog",
-    "til",
+    "blog/",
+    "til/",
     ...blogPosts.map((post) => `blog/${post.slug}`),
     ...tilPosts.map((post) => `til/${post.slug}`),
   ];
