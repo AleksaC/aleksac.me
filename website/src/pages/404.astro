@@ -1,0 +1,41 @@
+---
+import Layout from "@/layouts/base/layout.astro"
+---
+
+<Layout title="404">
+  <div class="flex h-[80vh] items-center justify-center md:h-[60vh]">
+    <div class="flex items-center">
+      <h1 class="px-4 text-3xl font-medium md:text-4xl">404</h1>
+      <div class="border-l border-black px-4 py-4 dark:border-whiteish">
+        <h2 class="text-xl md:text-2xl">Page Not Found</h2>
+        <div class="flex space-x-1">
+          <button class="underline" data-go-back>
+            Go back
+          </button>
+          <div>&middot;</div>
+            <a href="/" class="font-normal underline">Home</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const setUpGoBackButton = () => {
+    const navigationToggleButton = document.querySelector(
+      "[data-go-back]"
+    );
+
+    navigationToggleButton?.addEventListener("click", () => {
+      history.back()
+    });
+  };
+
+  setUpGoBackButton();
+
+  const observer = new MutationObserver(setUpGoBackButton);
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: false,
+  });
+</script>
