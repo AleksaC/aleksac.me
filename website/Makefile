@@ -26,9 +26,7 @@ node_modules: package.json $(LOCKFILE)
 build: dist
 
 # TODO: proper dependencies
-dist: node_modules src \
-			$(wildcard *.config.js) \
-			$(shell find src -type f)
+dist: node_modules src astro.config.ts tailwind.config.ts tsconfig.json $(shell find src -type f)
 	@$(NPM) run build || (touch astro.config.ts; exit 1)
 	@touch dist
 
