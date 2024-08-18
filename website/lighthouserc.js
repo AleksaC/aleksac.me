@@ -6,7 +6,7 @@ const str2Bool = (str) =>
   str.toLowerCase() in
   ["true", "1", "y", "yes"].reduce((o, k) => ({ ...o, [k]: null }), {});
 
-const prefix = process.env.WEBSITE_URL || "http://localhost:3000";
+const prefix = process.env.WEBSITE_URL || "http://localhost:4321";
 const isPreview = str2Bool(process.env.PREVIEW || "false");
 const deviceType = process.env.DEVICE_TYPE || "mobile";
 
