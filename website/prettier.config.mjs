@@ -8,7 +8,10 @@ const config = {
   semi: true,
   singleQuote: false,
   trailingComma: "es5",
-  plugins: ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
+  plugins: [
+    import.meta.resolve("prettier-plugin-astro"),
+    import.meta.resolve("prettier-plugin-tailwindcss"),
+  ],
 };
 
 export default config;
