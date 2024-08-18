@@ -12,16 +12,16 @@ fi
 
 if [ "$#" -eq 2 ]; then
     if [ "$1" = "--til" ]; then
-        cd _til
+        cd src/content/til
         shift
     elif [ "$2" = "--til" ]; then
-        cd _til
+        cd src/content/til
     else
         echo "When providing more than 1 argument one of them has to be `--til`!"
         exit 1
     fi
 else
-    cd _posts
+    cd src/content/blog
 fi
 
 slugify () {
@@ -67,7 +67,7 @@ filename=$(slugify "$1").md
 cat <<-EOF > $filename
 ---
 title: "$(to_title_case $1)"
-excerpt: ""
+description: ""
 coverImage: ""
 date: "$(date -I'seconds' -u)"
 draft: true
