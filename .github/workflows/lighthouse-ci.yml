@@ -35,94 +35,99 @@ jobs:
             npx-${{ runner.os }}
 
       # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#using-data-from-the-triggering-workflow
-      - name: Download artifact
-        uses: actions/github-script@v6
-        with:
-          script: |
-            let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
-               owner: context.repo.owner,
-               repo: context.repo.repo,
-               run_id: context.payload.workflow_run.id,
-            });
-            let matchArtifact = allArtifacts.data.artifacts.filter((artifact) => {
-              return artifact.name == "branch-name"
-            })[0];
-            let download = await github.rest.actions.downloadArtifact({
-               owner: context.repo.owner,
-               repo: context.repo.repo,
-               artifact_id: matchArtifact.id,
-               archive_format: 'zip',
-            });
-            let fs = require('fs');
-            fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/branch-name.zip`, Buffer.from(download.data));
+      # - name: Download artifact
+      #   uses: actions/github-script@v6
+      #   with:
+      #     script: |
+      #       let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
+      #          owner: context.repo.owner,
+      #          repo: context.repo.repo,
+      #          run_id: context.payload.workflow_run.id,
+      #       });
+      #       let matchArtifact = allArtifacts.data.artifacts.filter((artifact) => {
+      #         return artifact.name == "branch-name"
+      #       })[0];
+      #       let download = await github.rest.actions.downloadArtifact({
+      #          owner: context.repo.owner,
+      #          repo: context.repo.repo,
+      #          artifact_id: matchArtifact.id,
+      #          archive_format: 'zip',
+      #       });
+      #       let fs = require('fs');
+      #       fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/branch-name.zip`, Buffer.from(download.data));
 
       - name: Run lighthouse ci for mobile
         env:
           WEBSITE_URL: https://aleksac.me
         run: |
-          unzip $GITHUB_WORKSPACE/branch-name.zip
+          echo "astro-rewrite" > branch-name
+          # unzip $GITHUB_WORKSPACE/branch-name.zip
           BRANCH_NAME="$(cat branch-name)"
+
+          ehco $BRANCH_NAME
 
           if [ "$BRANCH_NAME" != "main" ]; then
               export "WEBSITE_URL=https://$BRANCH_NAME.aleksac-me.pages.dev"
               export PREVIEW=true
           fi
+
+          dig $WEBSITE_URL
 
           npx @lhci/cli@0.14.0 collect
           npx @lhci/cli@0.14.0 upload --githubStatusContextSuffix /mobile
           npx @lhci/cli@0.14.0 assert
 
-  ligthouse-ci-desktop:
-    runs-on: ubuntu-22.04
-    env:
-      LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
-    steps:
-      - uses: actions/checkout@v4
+  # ligthouse-ci-desktop:
+  #   runs-on: ubuntu-22.04
+  #   env:
+  #     LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "18"
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: "18"
 
-      - uses: actions/cache@v4
-        with:
-          path: ~/.npm/_npx
-          key: npx-${{ runner.os }}-${{ github.run_id }}
-          restore-keys: |
-            npx-${{ runner.os }}
+  #     - uses: actions/cache@v4
+  #       with:
+  #         path: ~/.npm/_npx
+  #         key: npx-${{ runner.os }}-${{ github.run_id }}
+  #         restore-keys: |
+  #           npx-${{ runner.os }}
 
-      - uses: actions/github-script@v6
-        with:
-          script: |
-            let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
-               owner: context.repo.owner,
-               repo: context.repo.repo,
-               run_id: context.payload.workflow_run.id,
-            });
-            let matchArtifact = allArtifacts.data.artifacts.filter((artifact) => {
-              return artifact.name == "branch-name"
-            })[0];
-            let download = await github.rest.actions.downloadArtifact({
-               owner: context.repo.owner,
-               repo: context.repo.repo,
-               artifact_id: matchArtifact.id,
-               archive_format: 'zip',
-            });
-            let fs = require('fs');
-            fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/branch-name.zip`, Buffer.from(download.data));
+  #     - uses: actions/github-script@v6
+  #       with:
+  #         script: |
+  #           let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
+  #              owner: context.repo.owner,
+  #              repo: context.repo.repo,
+  #              run_id: context.payload.workflow_run.id,
+  #           });
+  #           let matchArtifact = allArtifacts.data.artifacts.filter((artifact) => {
+  #             return artifact.name == "branch-name"
+  #           })[0];
+  #           let download = await github.rest.actions.downloadArtifact({
+  #              owner: context.repo.owner,
+  #              repo: context.repo.repo,
+  #              artifact_id: matchArtifact.id,
+  #              archive_format: 'zip',
+  #           });
+  #           let fs = require('fs');
+  #           fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/branch-name.zip`, Buffer.from(download.data));
 
-      - name: Run lighthouse ci for desktop
-        if: always()
-        env:
-          WEBSITE_URL: https://aleksac.me
-        run: |
-          unzip $GITHUB_WORKSPACE/branch-name.zip
-          BRANCH_NAME="$(cat branch-name)"
+  #     - name: Run lighthouse ci for desktop
+  #       if: always()
+  #       env:
+  #         WEBSITE_URL: https://aleksac.me
+  #       run: |
+  #         unzip $GITHUB_WORKSPACE/branch-name.zip
+  #         BRANCH_NAME="$(cat branch-name)"
 
-          if [ "$BRANCH_NAME" != "main" ]; then
-              export "WEBSITE_URL=https://$BRANCH_NAME.aleksac-me.pages.dev"
-              export PREVIEW=true
-          fi
+  #         if [ "$BRANCH_NAME" != "main" ]; then
+  #             export "WEBSITE_URL=https://$BRANCH_NAME.aleksac-me.pages.dev"
+  #             export PREVIEW=true
+  #         fi
 
-          DEVICE_TYPE=desktop npx @lhci/cli@0.14.0 collect
-          npx @lhci/cli@0.14.0 upload --githubStatusContextSuffix /desktop
-          npx @lhci/cli@0.14.0 assert
+  #         DEVICE_TYPE=desktop npx @lhci/cli@0.14.0 collect
+  #         npx @lhci/cli@0.14.0 upload --githubStatusContextSuffix /desktop
+  #         npx @lhci/cli@0.14.0 assert
