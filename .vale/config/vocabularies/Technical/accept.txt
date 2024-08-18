@@ -28,9 +28,10 @@ MB
 [Cc]loudflare
 prefetch
 js
-astro
+Astro
 qwik
-preact
+Preact
+compat
 cAdvisor
 autoscaler
 AMI

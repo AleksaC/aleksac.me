@@ -1,7 +1,0 @@
-.share-button {
-  @apply flex h-7 w-7 items-center justify-center rounded-full bg-gray-300;
-}
-
-:global(.dark) .share-button {
-  @apply bg-[#2F3336];
-}

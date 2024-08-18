@@ -18,7 +18,23 @@
     @apply text-2xl font-semibold leading-snug;
   }
 
-  code {
+  pre {
+    @apply rounded-md;
+    @apply whitespace-pre;
+    @apply text-sm;
+    @apply overflow-y-hidden;
+  }
+
+  pre code {
+    @apply overflow-x-scroll;
+    @apply w-full;
+    @apply block;
+    @apply py-6;
+    @apply pl-6;
+    @apply max-w-[40rem];
+  }
+
+  p code {
     @apply bg-gray-300;
     @apply py-0.5;
     @apply px-1.5;
@@ -66,7 +82,7 @@
   @apply text-sky-500;
 }
 
-.dark code {
+.dark p code {
   @apply bg-[#2F3336];
 }
 

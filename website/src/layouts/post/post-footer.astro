@@ -1,0 +1,40 @@
+---
+import ShareButtons from "@/components/share-buttons.astro";
+
+type Props = {
+  discussion?: Record<string, string>;
+};
+
+const { discussion } = Astro.props;
+---
+
+<div
+  class="mx-auto mb-14 flex max-w-3xl flex-col items-center space-y-2 border-t px-2 pt-4 text-center md:mt-10 md:px-4"
+>
+  <div class="flex items-center space-x-4">
+    <div>Share:</div>
+    <ShareButtons />
+  </div>
+  {
+    discussion && (
+      <p class="space-x-2">
+        <span>Discuss:</span>
+        {Object.entries(discussion).map(([name, link]) => (
+          <a href={link}>{name}</a>
+        ))}
+      </p>
+    )
+  }
+  <p>
+    If you've come this far with the article you may want to know a thing or two
+    <a href="/">about me</a> if you don't already. You can also read other
+    <a href="/blog">blog posts</a> or about stuff
+    <a href="/til">I've learned</a> recently.
+  </p>
+  <p class="pt-3">
+    This website is{" "}
+    <a href="https://github.com/AleksaC/aleksac.me">open source</a>. If you've
+    come across a mistake please let me know there. For other types of feedback
+    you can reach out to me through email or social media.
+  </p>
+</div>

@@ -1,0 +1,67 @@
+---
+import type { IconLink, Route } from "./types";
+
+type Props = {
+  routes: Route[];
+  links: Record<string, IconLink>;
+};
+
+const { routes, links } = Astro.props;
+---
+
+<div class="flex-col md:space-x-4 -md:flex">
+  {
+    routes.map((route) => (
+      // inline-block is set because whitespace is significant for inline elements
+      // so the newlines before and after {route.name} are rendered as spaces
+      // unlike jsx astro doesn't remove the spaces https://github.com/withastro/astro/issues/6893
+      <a
+        class={
+          "inline-block font-bold hover:underline -md:border-b -md:border-current -md:py-2 -md:pl-4"
+        }
+        href={route.href}
+        data-route
+      >
+        {route.name}
+      </a>
+    ))
+  }
+</div>
+<div class="flex items-center space-x-4 -md:mt-4 -md:pl-4">
+  {
+    Object.entries(links).map(([name, { link, icon: Icon, data }]) => (
+      <a
+        href={link}
+        title={name.toLowerCase()}
+        aria-label={name.toLocaleLowerCase()}
+        {...data}
+      >
+        <Icon />
+      </a>
+    ))
+  }
+</div>
+
+<script>
+  const setCurrentRoute = () => {
+    const routes =
+      document.querySelectorAll<HTMLAnchorElement>("a[data-route]");
+    routes.forEach((route) => {
+      const routePath = new URL(route.href).pathname;
+      const currentPath = new URL(window.location.href).pathname;
+      if (currentPath === routePath) {
+        route.classList.add("md:underline");
+      } else if (currentPath.startsWith(routePath) && routePath !== "/") {
+        route.classList.add("md:underline");
+      }
+    });
+  };
+
+  setCurrentRoute();
+
+  const observer = new MutationObserver(setCurrentRoute);
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: false,
+  });
+</script>

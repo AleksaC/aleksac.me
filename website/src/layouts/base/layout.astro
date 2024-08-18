@@ -1,0 +1,107 @@
+---
+import "@/styles/index.css";
+
+import { join } from "node:path";
+
+import { TITLE, TAGS } from "@/constants/meta";
+import { ViewTransitions } from "astro:transitions";
+import RssIcon from "@/components/icons/rss.astro";
+
+import { SOCIAL_MEDIA } from "@/constants/social-media";
+import type { IconLink, Route } from "./header/types";
+import Header from "./header/header.astro";
+import GoToTopButton from "./go-to-top-button.astro";
+import { WEBSITE_URL } from "@/config";
+
+type Props = {
+  title: string;
+  meta?: Record<string, string>;
+};
+
+const routes: Route[] = [
+  {
+    name: "About",
+    href: "/",
+  },
+  {
+    name: "Blog",
+    href: "/blog/",
+  },
+  {
+    name: "TIL",
+    href: "/til/",
+  },
+];
+
+const links: Record<string, IconLink> = {
+  RSS: {
+    icon: RssIcon,
+    link: "/feed.xml",
+    data: {
+      "data-astro-prefetch": "false",
+    },
+  },
+  ...SOCIAL_MEDIA,
+};
+
+const { title, meta } = Astro.props;
+
+const tags = {
+  ...TAGS,
+  ...meta,
+};
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+    <link rel="canonical" href={join(WEBSITE_URL, Astro.url.pathname)} />
+    {
+      Object.entries(tags).map(([name, content]) => (
+        <meta name={name} content={content} />
+      ))
+    }
+    <title>{`${title} | ${TITLE}`}</title>
+    <!-- This script needs to be added inline to avoid flickering when dark theme is used,
+     astro doesn't process inline scripts and processed scripts are always loaded
+     as type="module" so code needs to be duplicated
+     see: https://docs.astro.build/en/guides/client-side-scripts -->
+    <script is:inline>
+      const THEME_KEY = "__theme__";
+
+      const setInitialTheme = () => {
+        if (
+          localStorage.getItem(THEME_KEY) === "dark" ||
+          (!(THEME_KEY in localStorage) &&
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches)
+        ) {
+          document.documentElement.classList.add("dark");
+          localStorage.setItem(THEME_KEY, "dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+          localStorage.setItem(THEME_KEY, "light");
+        }
+      };
+
+      setInitialTheme();
+
+      const observer = new MutationObserver(setInitialTheme);
+      observer.observe(document.documentElement, {
+        childList: true,
+        subtree: false,
+      });
+    </script>
+    <ViewTransitions />
+  </head>
+  <body class="dark:text-whiteish">
+    <Header routes={routes} links={links} />
+    <main class="mx-auto max-w-6xl px-5">
+      <slot />
+    </main>
+    <GoToTopButton />
+  </body>
+</html>

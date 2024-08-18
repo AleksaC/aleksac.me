@@ -1,0 +1,30 @@
+<div class="mx-auto mt-8 max-w-2xl md:mt-16">
+  <div class="markdown">
+    <slot />
+  </div>
+</div>
+
+<style is:global>
+  .markdown {
+    @apply text-lg leading-relaxed;
+  }
+
+  .markdown p,
+  .markdown pre,
+  .markdown blockquote {
+    @apply my-6;
+  }
+
+  .markdown ul,
+  .markdown ol {
+    @apply -mt-4;
+  }
+
+  .markdown h2 {
+    @apply mb-4 mt-12 text-3xl leading-snug;
+  }
+
+  .markdown h3 {
+    @apply mb-4 mt-8 text-2xl leading-snug;
+  }
+</style>

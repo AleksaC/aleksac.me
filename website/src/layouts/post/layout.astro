@@ -1,0 +1,130 @@
+---
+import FormattedTime from "@/components/formatted-time.astro";
+import PostBody from "./post-body.astro";
+import PostFooter from "./post-footer.astro";
+import ShareButtons from "@/components/share-buttons.astro";
+import BaseLayout from "../base/layout.astro";
+import { type CollectionEntry } from "astro:content";
+import ProgressBar from "@/components/progress-bar.astro";
+
+type Props = {
+  post: CollectionEntry<"blog"> | CollectionEntry<"til">;
+};
+
+const { post } = Astro.props;
+
+const {
+  data: { title, date, coverImage, discussion, meta },
+} = post;
+
+const metaTags = { ...meta };
+if (coverImage && !meta?.ogImage) {
+  metaTags.ogImage = coverImage;
+}
+
+const { Content } = await post.render();
+---
+
+<BaseLayout title={title} meta={metaTags}>
+  <article>
+    <ProgressBar />
+    <h1
+      class="mb-8 text-center text-5xl font-bold leading-tight tracking-tighter md:text-left md:text-6xl md:leading-none"
+    >
+      {title}
+    </h1>
+    <div class="mb-6 flex justify-between text-lg">
+      <FormattedTime date={date} />
+      <ShareButtons />
+    </div>
+    {
+      coverImage && (
+        <img
+          src={coverImage}
+          alt={`Cover Image for ${title}`}
+          class="h-auto w-full shadow-sm"
+          width="2"
+          height="1"
+        />
+      )
+    }
+    <PostBody>
+      <Content />
+    </PostBody>
+    <PostFooter discussion={discussion} />
+  </article>
+</BaseLayout>
+
+<script>
+  const copyButton = `\
+    <div class="relative z-10 h-0 w-full">
+      <button
+        class="absolute right-1 top-1 flex h-5 w-12 items-center justify-end rounded-md border border-solid border-gray-100 bg-white bg-opacity-90 p-1 px-2 text-xs text-black dark:border-gray-700 dark:bg-gray-900 dark:text-whiteish"
+        aria-label="copy code"
+      >
+        Copy
+      </button>
+    </div>
+  `;
+
+  const copiedTooltip = `\
+    <div
+      class="absolute right-14 top-1 flex h-5 items-center justify-center whitespace-normal p-0 text-xs font-thin leading-none text-white text-opacity-90"
+    >
+      Copied!
+    </div>
+  `;
+
+  const copyToClipboard = (preElement: HTMLElement) => {
+    const toCopy: string[] = [];
+
+    preElement.childNodes.forEach((child) => {
+      if (child.nodeName === "CODE" && child.textContent) {
+        toCopy.push(child.textContent);
+      }
+    });
+
+    navigator.clipboard.writeText(toCopy.join("").trim());
+  };
+
+  const flashTooltip = (copyBtn: HTMLDivElement) => {
+    const tmp = document.createElement("template");
+    tmp.innerHTML = copiedTooltip.trim();
+    const tooltip = tmp.content.firstChild as ChildNode;
+
+    copyBtn.appendChild(tooltip);
+
+    setTimeout(() => {
+      copyBtn.removeChild(tooltip);
+    }, 500);
+  };
+
+  const setUpCopyButtons = () => {
+    const codeBlocks = document.querySelectorAll("pre");
+
+    for (const codeBlock of codeBlocks) {
+      const tmp = document.createElement("template");
+      tmp.innerHTML = copyButton.trim();
+      const copyBtn = tmp.content.firstChild as HTMLDivElement;
+
+      copyBtn.addEventListener(
+        "click",
+        () => {
+          copyToClipboard(codeBlock);
+          flashTooltip(copyBtn);
+        },
+        { capture: true }
+      );
+
+      codeBlock.insertBefore(copyBtn, codeBlock.firstChild);
+    }
+  };
+
+  setUpCopyButtons();
+
+  const observer = new MutationObserver(setUpCopyButtons);
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: false,
+  });
+</script>

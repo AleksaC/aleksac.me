@@ -1,0 +1,91 @@
+---
+import type { IconLink, Route } from "./types";
+
+import ThemeToggle from "../theme/theme-toggle.astro";
+import Nav from "./nav.astro";
+
+type Props = {
+  routes: Route[];
+  links: Record<string, IconLink>;
+};
+
+const { routes, links } = Astro.props;
+---
+
+<header class="mb-6 border-b border-current md:mb-12">
+  <nav
+    class="mx-auto flex max-w-6xl items-center justify-between px-5 pb-4 pt-5 leading-tight tracking-tight md:pb-8 md:pt-8 md:tracking-tighter"
+  >
+    <a class="text-2xl font-bold hover:no-underline md:text-4xl" href="/">
+      Aleksa Cukovic
+    </a>
+    <div class="flex items-center space-x-4">
+      <ThemeToggle />
+      <button
+        class="md:hidden"
+        aria-label="navigation toggle"
+        data-navigation-toggle
+      >
+        <div class="relative hidden rotate-45" data-navigation-toggle-hide>
+          <div class="h-1 w-6 bg-black dark:bg-whiteish"></div>
+          <div
+            class="absolute top-0 h-1 w-6 rotate-90 bg-black dark:bg-whiteish"
+          >
+          </div>
+        </div>
+        <div class="space-y-1" data-navigation-toggle-show>
+          <div class="h-1 w-6 bg-black dark:bg-whiteish"></div>
+          <div class="h-1 w-6 bg-black dark:bg-whiteish"></div>
+          <div class="h-1 w-6 bg-black dark:bg-whiteish"></div>
+        </div>
+      </button>
+      <div class="hidden space-x-4 md:flex md:text-2xl">
+        <Nav routes={routes} links={links} />
+      </div>
+    </div>
+  </nav>
+  <div
+    class="hidden border border-current pb-4 md:hidden"
+    data-navigation-overlay
+  >
+    <Nav routes={routes} links={links} />
+  </div>
+</header>
+
+<script>
+  const setUpNavigationToggle = () => {
+    const navigationToggleButton = document.querySelector(
+      "[data-navigation-toggle]"
+    );
+
+    navigationToggleButton?.addEventListener("click", () => {
+      const navigationToggleShow = document.querySelector(
+        "[data-navigation-toggle-show]"
+      );
+      const navigationToggleHide = document.querySelector(
+        "[data-navigation-toggle-hide]"
+      );
+      const navigationOverlay = document.querySelector(
+        "[data-navigation-overlay]"
+      );
+
+      if (navigationToggleHide?.classList.contains("hidden")) {
+        navigationOverlay?.classList.remove("hidden");
+        navigationToggleHide?.classList.remove("hidden");
+        navigationToggleShow?.classList.add("hidden");
+      } else {
+        navigationOverlay?.classList.add("hidden");
+        navigationToggleHide?.classList.add("hidden");
+        navigationToggleShow?.classList.remove("hidden");
+      }
+    });
+  };
+
+  setUpNavigationToggle();
+
+  const observer = new MutationObserver(setUpNavigationToggle);
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: false,
+  });
+</script>
