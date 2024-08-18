@@ -8,4 +8,5 @@ export type Route = {
 export type IconLink = {
   icon: AstroComponentFactory;
   link: string;
+  data?: Record<string, string>;
 };

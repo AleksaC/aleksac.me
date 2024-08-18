@@ -37,6 +37,9 @@ const links: Record<string, IconLink> = {
   RSS: {
     icon: RssIcon,
     link: "/feed.xml",
+    data: {
+      "data-astro-prefetch": "false"
+    },
   },
   ...SOCIAL_MEDIA,
 };
