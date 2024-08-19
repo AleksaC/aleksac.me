@@ -54,6 +54,11 @@ spellcheck:
 serve: build
 	@$(NPM) run preview
 
+.PHONY: lhci
+lhci:
+	@npx @lhci/cli@0.14.0 collect -n 1
+	@npx @lhci/cli@0.14.0 assert
+
 .PHONY: post
 post:
 	@../scripts/add-draft.sh "$(title)"
