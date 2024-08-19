@@ -21,8 +21,8 @@ wrong path as I spent a decent amount of time investigating it.
 
 Since I couldn't find anything useful, I decided to look at the Image Updater code
 and quickly figured out that why it wasn't pushing the updates. It also turned
-out that I could have learned [this](https://argocd-image-updater.readthedocs.io/en/stable/configuration/images/#forcing-image-updates)
-from the documentation had I been more thorough in reading it.
+out that I could have learned this from the [documentation](https://argocd-image-updater.readthedocs.io/en/stable/configuration/images/#forcing-image-updates)
+had I been more thorough in reading it.
 
 While I get why it would make sense to grab images from the ArgoCD app status, I
 don't think it's a good default. When I put an image in the Image Updater image
