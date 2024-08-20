@@ -1,4 +1,4 @@
-<div class="mx-auto mt-8 max-w-2xl md:mt-16">
+<div class="mx-auto mt-6 max-w-3xl md:mt-16">
   <div class="markdown">
     <slot />
   </div>
@@ -6,7 +6,7 @@
 
 <style is:global>
   .markdown {
-    @apply text-lg leading-relaxed;
+    @apply leading-relaxed md:text-lg;
   }
 
   .markdown p,
@@ -21,10 +21,10 @@
   }
 
   .markdown h2 {
-    @apply mb-4 mt-12 text-3xl leading-snug;
+    @apply mb-4 mt-12 text-2xl leading-snug md:text-3xl;
   }
 
   .markdown h3 {
-    @apply mb-4 mt-8 text-2xl leading-snug;
+    @apply mb-4 mt-8 text-xl leading-snug md:text-2xl;
   }
 </style>

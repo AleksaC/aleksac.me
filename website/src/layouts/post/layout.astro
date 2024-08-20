@@ -28,14 +28,18 @@ const { Content } = await post.render();
 <BaseLayout title={title} meta={metaTags}>
   <article>
     <ProgressBar />
-    <h1
-      class="mb-8 text-center text-5xl font-bold leading-tight tracking-tighter md:text-left md:text-6xl md:leading-none"
+    <div
+      class="mx-auto max-w-4xl border-b border-solid dark:border-neutral-400"
     >
-      {title}
-    </h1>
-    <div class="mb-6 flex justify-between text-lg">
-      <FormattedTime date={date} />
-      <ShareButtons />
+      <h1
+        class="mb-8 text-center text-4xl font-bold leading-tight tracking-tighter md:text-5xl md:leading-none"
+      >
+        {title}
+      </h1>
+      <div class="mb-6 flex items-center justify-between md:text-lg">
+        <FormattedTime date={date} />
+        <ShareButtons />
+      </div>
     </div>
     {
       coverImage && (

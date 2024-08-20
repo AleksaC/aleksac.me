@@ -8,7 +8,7 @@ date: '2022-10-16T21:47:37+00:00'
 `ENV PYTHONDONTWRITEBYTECODE 1` is [very common](https://github.com/search?l=Dockerfile&q=%22ENV+PYTHONDONTWRITEBYTECODE+1%22&type=Code)
 in python dockerfiles. However most of the time it is useless at best and harmful at worst.
 
-### What does PYTHONDONTWRITEBYTECODE do
+## Preventing python from caching compiled bytecode
 
 CPython doesn't execute the code directly. Instead it first compiles the code into
 bytecode which is cached as `.pyc` files in `__pycache__` directory you know and hate.
@@ -17,7 +17,7 @@ that haven't changed. If for some reason you want to prevent python from caching
 the bytecode, you can set [`PYTHONDONTWRITEBYTECODE`](https://docs.python.org/3/using/cmdline.html#envvar-PYTHONDONTWRITEBYTECODE)
 environment variable to a non-empty string.
 
-### Why include it in dockerfiles
+## Why do it in dockerfiles
 
 The first thing that comes to mind when thinking about potential problems with
 caching things is the possibility of getting a stale version of the resource we
@@ -39,7 +39,7 @@ dockerfiles is to reduce the size of the image. Since we want to make our images
 as small as possible it may make sense not to store the cache files.
 However in most cases `PYTHONDONTWRITEBYTECODE` saves us **NOTHING AT ALL!**
 
-### pip doesn't care about this option
+## pip doesn't care about this option
 
 Since you usually aren't running your app during the build process, no `pyc` files are
 generated for your code. Now you need to peek into a freshly created vritualenv
@@ -64,7 +64,7 @@ since version `1.4.0` (prior to that version you had [no way](https://github.com
 of preventing it from generating the pycs) and instead exposes a [`--compile`](https://python-poetry.org/docs/cli/#options-2)
 flag to perform the compilation.
 
-### How much does it save you
+## How much does it save you
 
 As explained above, `PYTHONDONTWRITEBYTECODE` doesn't save you anything, but
 running `pip install` with `--no-compile` or a regular poetry install will net
@@ -73,7 +73,7 @@ monolith I have at work, running poetry install without `--compile` saves `63MB`
 which is almost a 15% reduction in image size. This obviously doesn't come for
 free, so let's explore the downsides.
 
-### How it hurts you
+## How it hurts you
 
 Not generating means the modules need to be compiled during import time.
 Since most imports occur at startup this means that disabling bytecode caching
@@ -88,7 +88,7 @@ that uses them leading to unexpected latency spikes. Heavy dependencies like
 pandas and numpy which take ages to import even with the bytecode cache compiled,
 can easily add a couple of seconds to the action that first triggered their import.
 
-### TL;DR
+## TL;DR
 
 You probably want `pip install --no-compile` instead of  `PYTHONDONTWRITEBYTECODE=1`,
 even though you probably shouldn't use either one of them.
