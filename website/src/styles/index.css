@@ -4,7 +4,7 @@
 
 @layer base {
   p a {
-    @apply text-blue-600 underline;
+    @apply text-blue-700 underline;
   }
 
   h1,
