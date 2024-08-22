@@ -25,7 +25,6 @@ node_modules: package.json $(LOCKFILE)
 .PHONY: build
 build: dist
 
-# TODO: proper dependencies
 dist: node_modules src astro.config.ts tailwind.config.ts tsconfig.json $(shell find src -type f)
 	@$(NPM) run build || (touch astro.config.ts; exit 1)
 	@touch dist
@@ -52,7 +51,7 @@ spellcheck:
 
 .PHONY: serve
 serve: build
-	@$(NPM) run preview
+	@$(NPM) run preview --host $(or $(host), '0.0.0.0')
 
 .PHONY: lhci
 lhci:
