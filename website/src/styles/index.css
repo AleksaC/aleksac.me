@@ -34,7 +34,9 @@
     @apply max-w-[40rem];
   }
 
-  p code {
+  p code,
+  li code,
+  ol code {
     @apply bg-gray-300;
     @apply py-0.5;
     @apply px-1.5;
@@ -82,7 +84,9 @@
   @apply text-sky-500;
 }
 
-.dark p code {
+.dark p code,
+.dark li code,
+.dark ol code {
   @apply bg-[#2F3336];
 }
 
