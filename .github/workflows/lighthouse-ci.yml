@@ -67,8 +67,6 @@ jobs:
               export PREVIEW=true
           fi
 
-          dig $WEBSITE_URL
-
           npx @lhci/cli@0.14.0 collect
           npx @lhci/cli@0.14.0 upload --githubStatusContextSuffix /mobile
           npx @lhci/cli@0.14.0 assert
