@@ -15,8 +15,10 @@ defaults:
 jobs:
   ligthouse-ci-mobile:
     runs-on: ubuntu-22.04
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     env:
       LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
     steps:
       - uses: actions/checkout@v4
 
@@ -73,8 +75,10 @@ jobs:
 
   ligthouse-ci-desktop:
     runs-on: ubuntu-22.04
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     env:
       LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
     steps:
       - uses: actions/checkout@v4
 
