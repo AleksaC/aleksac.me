@@ -53,17 +53,7 @@ jobs:
           cache-dependency-path: website/pnpm-lock.yaml
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Set up eslint and tsbuildinfo cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            website/.eslintcache
-            website/tsconfig.tsbuildinfo
-          key: static-analysis-${{ runner.os }}-${{ github.run_id }}
-          restore-keys: |
-            static-analysis-${{ runner.os }}
+        run: pnpm install --frozen-lockfile --prod
 
       - name: Run build and check
         env:
