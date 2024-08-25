@@ -81,9 +81,11 @@ jobs:
       # triggered by `worflow_run` run against the default branch
       # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#using-data-from-the-triggering-workflow
       - name: Save branch name
+        env:
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
         run: |
           mkdir -p ./branch-name
-          echo -n $GITHUB_REF_NAME > ./branch-name/branch-name
+          echo -n $BRANCH_NAME > ./branch-name/branch-name
 
       - uses: actions/upload-artifact@v4
         with:
