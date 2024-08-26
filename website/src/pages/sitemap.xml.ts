@@ -9,8 +9,8 @@ export async function GET() {
     "",
     "blog/",
     "til/",
-    ...blogPosts.map((post) => `blog/${post.slug}`),
-    ...tilPosts.map((post) => `til/${post.slug}`),
+    ...blogPosts.map((post) => `blog/${post.slug}/`),
+    ...tilPosts.map((post) => `til/${post.slug}/`),
   ];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
