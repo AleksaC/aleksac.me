@@ -28,9 +28,8 @@ repos:
         name: astro check
         language: system
         pass_filenames: false
-        files: \.([tj]sx?|astro)$
-        exclude: website.*
-        entry: pnpm --silent --prefix personal-website astro check
+        files: .*\.([tj]sx?|astro)$
+        entry: pnpm --silent --prefix website astro check
 
   - repo: https://github.com/errata-ai/vale
     rev: v3.7.0

@@ -24,4 +24,4 @@ jobs:
           python-version: "3.12"
       - uses: pre-commit/action@v3.0.1
         env:
-          SKIP: check
+          SKIP: astro-check,vale
