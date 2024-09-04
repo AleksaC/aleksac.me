@@ -5,7 +5,7 @@ date: "2024-08-22T18:51:05+00:00"
 
 By default Astro uses `directory` [build format](https://docs.astro.build/en/reference/configuration-reference/#buildformat),
 which generates directories with `index.html` for each page (e.g. `src/pages/about.astro`
-becomes `src/pages/about/index.html`). This isn't an issue in and of itself. However,
+becomes `dist/about/index.html`). This isn't an issue in and of itself. However,
 there doesn't seem to be a standard for how these pages should be served.
 
 When you navigate to `/about` you may get:
