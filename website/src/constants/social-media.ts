@@ -10,7 +10,7 @@ export const SOCIAL_MEDIA = {
   },
   twitter: {
     icon: TwitterIcon,
-    link: "https://twitter.com/Aleksa_C_",
+    link: "https://x.com/Aleksa_C_",
   },
   instagram: {
     icon: InstagramIcon,
