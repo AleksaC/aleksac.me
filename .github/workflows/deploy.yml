@@ -35,7 +35,7 @@ defaults:
     working-directory: website
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -91,22 +91,3 @@ jobs:
         with:
           name: branch-name
           path: website/branch-name/
-
-      # In some cases Cloudflare returns stale version of the resume.pdf file
-      # An alternative resolution would be to disable cache for that path either
-      # by using a cache rule or setting a no-cache header for the path
-      - name: Purge CloudFlare cache for resume.pdf
-        env:
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        run: |
-          res=$(curl \
-            --url "https://api.cloudflare.com/client/v4/zones/${CLOUDFLARE_ACCOUNT_ID}/purge_cache" \
-            --header "Content-Type: application/json" \
-            --header "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
-            --data '{
-              "files":[{"url":"https://aleksac.me/resume.pdf"}]
-            }')
-          if [ $(echo $res | jq -r '.success') != true ]; then
-            exit 1
-          fi
