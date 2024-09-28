@@ -74,13 +74,16 @@ data:
     set -eou pipefail;
 
     delete_before() {
-        local obj_kind=$1
-        local cluster=$2
-        local interval=$3
+      local obj_kind=$1
+      local cluster=$2
+      local interval=$3
 
-        kubectl get $obj_kind --selector=cnpg.io/cluster=$cluster -o go-template --template '{{ range .items }}{{ .metadata.name }} {{ .metadata.creationTimestamp }}{{ "\n" }}{{ end }}' \
-            | awk '$2 <= "'$(date --date="now - $interval day" -I'seconds' -u | sed 's/+00:00/Z/')'" { print $1 }' \
-            | xargs --no-run-if-empty kubectl delete $obj_kind
+      kubectl get $obj_kind \
+        --selector=cnpg.io/cluster=$cluster \
+        -o go-template \
+        --template '{{ range .items }}{{ .metadata.name }} {{ .metadata.creationTimestamp }}{{ "\n" }}{{ end }}' \
+          | awk '$2 <= "'$(date --date="now - $interval day" -I'seconds' -u | sed 's/+00:00/Z/')'" { print $1 }' \
+          | xargs --no-run-if-empty kubectl delete $obj_kind
     }
 
     delete_before backup $CNPG_CLUSTER_NAME $RETENTION_IN_DAYS
