@@ -7,7 +7,7 @@ env
 (?i)dns
 redis
 nginx
-kubernetes
+[Kk]ubernetes
 kubelet
 kyverno
 namespace
@@ -47,3 +47,6 @@ pyc
 [Vv]ite
 Netlify
 hugo
+WAL
+[Pp]ostgres
+cron
