@@ -9,24 +9,25 @@ Code behind my personal website, [aleksac.me](https://aleksac.me).
 
 ## About
 
-The website is built using [Astro](https://github.com/withastro/astro), without
-additional frameworks like React.
+The website is built using [Astro](https://github.com/withastro/astro), without additional frameworks.
 
 The first version of the website was built with [Next.js](https://github.com/vercel/next.js)
-and [Preact](https://preactjs.com/). This was before Next 13, which introduced
-some major changes. It wasn't easy for upgrade the version, and Preact compat was
-no longer supported.
+and [Preact](https://preactjs.com/). It was what I knew best at the time, and using
+Preact with a compat layer instead of React in production builds kept the bundle
+size within the acceptable range. This was before Next 13, which introduced
+some major changes that made it hard for me to keep my existing setup, and in general
+moved in a completely different direction from the stuff I needed for this website.
 
-Since Next.js was moving in a completely different direction from the stuff I needed
-for this website, I started looking for alternatives. The things I was looking
-for in a new framework were:
-
+For this reason I decided to look for an alternative. The things I was looking for were:
 - JSX
 - clientside routing and route prefetching
-- decent level of adoption
+- small bundle size
+- as little dependencies as possible
+- decent level of adoption and stability
 
-Astro fit these perfectly, and the rewrite process was going smoothly for a subset
-of functionality, so I decided to do a full rewrite.
+Astro fit these (almost) perfectly, so I decided to test it and reimplement a subset
+of functionality I had in the Next version of the website. This went smoothly, so
+I rewrote the entire website in less than a week.
 
 ### Getting started
 
@@ -52,11 +53,10 @@ and `pnpm run dev`.
 ### Infra
 
 The website is deployed to [Cloudflare Pages](https://pages.cloudflare.com/).
-It offers great performance as well as availability across the globe for the low
-price of free. Preview builds are also nice.
+It offers great performance and unlimited bandwidth for the low price of free.
+Preview builds are also nice.
 
-The deployment is not done through cloudflare pages github integration.
-I'm using GitHub Actions instead.
+The deployment is not done through their GitHub Integration. I'm using GitHub Actions instead.
 
 This gets me:
 
