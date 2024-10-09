@@ -1,0 +1,129 @@
+---
+import Layout from "@/layouts/base/layout.astro";
+import { statSync } from "node:fs";
+
+import { format } from "date-fns";
+
+const fileName = new URL(import.meta.url).pathname;
+const mtime = statSync(fileName).mtime;
+const updatedAt = format(mtime, "LLLL d, yyyy");
+---
+
+<Layout title="Now">
+  <div class="mx-auto max-w-4xl pb-10 md:pb-0 xl:pb-10">
+    <div>
+      <h1 class="text-3xl font-bold md:text-5xl">Now</h1>
+      <p class="pt-2 text-sm italic">
+        This page contains summary of what's been going on in my life lately.
+        I'll try to update it every couple of months, or when something big
+        happens. Many personal websites have now pages, and you can find some of
+        them on
+        <a href="https://nownownow.com/">nownownow</a>.
+      </p>
+    </div>
+    <div class="space-y-4">
+      <h2 class="mb-4 mt-8 text-2xl leading-snug">Work</h2>
+      <p>
+        I quit my job in August. It may have seemed out of the blue to some
+        people, but I've been planning to quit for quite some time. I felt there
+        wasn't much opportunity to grow left and other than occasional
+        interesting technical problem, the work wasn't fulfilling to me.
+        Initially I didn't plan on leaving until I found something else, but
+        there was an opportunity to take a voluntary exit during a company reorg
+        and leave with severance, so I took it.
+
+        <br /><br />
+
+        After leaving, I took a month-long break to recharge and rethink my
+        priorities and strategy going forward. While I still have
+        entrepreneurial ambitions, I don't think it's the right time to pursue
+        them full time, so I decided to start looking for a new job.
+      </p>
+      <h2 class="mb-4 mt-8 text-2xl leading-snug">Job Search</h2>
+      <p>
+        This is the first time in my five-year long career that I'm going on a
+        job search. All of my previous jobs and side gigs have been from
+        referrals. Up until this point I conducted more interviews as an
+        interviewer than an interviewee.
+
+        <br /><br />
+
+        I did some interviews with companies that reached out to me after
+        finding out I left my job, as well as some warmup interviews, and I've
+        been happy with the results. I've gotten much better at handling the
+        stress from the interviews, which was the main reason I've been avoiding
+        doing them for so long.
+
+        <br /><br />
+
+        Since I'm not in a rush to get a job, I'm focusing on companies and
+        positions that seem ideal for me. Unfortunately a large portion of
+        companies don't hire outside the US, even for remote positions, which
+        constricts the pool of available options. Going into this process I
+        expected to land more interviews, but it appears that I'm not as strong
+        of a candidate on paper. I mostly moved away from cold applications on
+        company websites towards a more personalized approach.
+
+        <br /><br />
+
+        I have mixed feelings about all of this so far. The market isn't great,
+        as everyone is telling, and the process is broken in most places I've
+        interviewed with, but I don't think the situation is that bad and there
+        is some method to the madness. I learned a lot during this time and I'll
+        probably do a longer write-up about my experience once I'm done.
+      </p>
+      <h2 class="mb-4 mt-8 text-2xl leading-snug">Side Projects</h2>
+      <p>
+        I finally started working on the side project that's been brewing in my
+        had for quite some time. I'm still not going to publicly reveal what it
+        is, but I hope to ship the first version soon. I have an initial design
+        draft and I made a decent progress on parser for the schema language
+        it's going to be based on. I'm using Go, and so far I'm happy with my
+        rate of progress and the quality of code I'm producing.
+
+        <br /><br />
+
+        I'm still playing with and keeping track on AI. While there are some
+        good use cases, I still think it's more of a distraction than something
+        to build a product on or build into a product. I think there's a huge
+        amount of alpha in going the opposite direction, and building something
+        in more established spaces while everyone's distracted with shoehorning
+        an LLM into their product.
+      </p>
+      <h2 class="mb-4 mt-8 text-2xl leading-snug">Gym</h2>
+      <p>
+        For the first time in almost a decade, I've been hitting the gym
+        consistently, and it started showing. I'm the strongest I've ever been,
+        and if we ignore some belly fat, I look pretty good. I'm still not
+        hitting all 5.5 workouts per week, but I do at least 4. When it comes to
+        cardio I'm still in poor shape, but I'm planning to change that.
+      </p>
+      <h2 class="mb-4 mt-8 text-2xl leading-snug">Traveling</h2>
+      <p>
+        I visited Bucharest near the end of September. It wasn't what I
+        expected, but overall I was pleasantly surprised. In a couple of days
+        I'm going to visit Trieste with a big group of friends. It's going to be
+        a short trip, but I expect a lot of fun. As always, I'm looking for my
+        next destination. However, it's likely that I'm going to have to put any
+        ideas I have on hold until I finish my job search and settle into a new
+        position.
+      </p>
+      <h2 class="mb-4 mt-8 text-2xl leading-snug">Entertainment</h2>
+      <p>
+        I haven't been playing video games since April, and even though most of
+        that time still isn't going towards something useful, I'm spending less
+        time behind a desk so I take it as a win.
+      </p>
+      <p>
+        I've been into murder mysteries lately. I watched Moonflower Murders,
+        and it was good, but not as good as its predecessor. Currently I'm
+        watching the fourth season of Only Murders in the Building, and I've
+        been loving it so far. In my opinion it's on par with the first season.
+        I liked the first season of Orphan Black but didn't continue, probably
+        because I've already read some spoilers and there are quite a few
+        episodes left.
+      </p>
+    </div>
+    <div class="mt-6 text-sm italic">Last updated: {updatedAt}</div>
+  </div>
+</Layout>
