@@ -22,9 +22,7 @@
   const setUpGoToTopButton = () => {
     const goToTopButton = document.querySelector("button[data-go-to-top]");
 
-    goToTopButton?.addEventListener("click", () =>
-      window.scrollTo({ top: 0, behavior: "smooth" })
-    );
+    goToTopButton?.addEventListener("click", () => window.scrollTo({ top: 0 }));
 
     const visibilityToggle = () => {
       const scrollTop =
