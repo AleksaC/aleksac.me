@@ -17,7 +17,7 @@ export async function GET() {
   for (const post of blogPosts) {
     feed.item({
       title: post.data.title,
-      url: `${WEBSITE_URL}/blog/${post.slug}/`,
+      url: `${WEBSITE_URL}/blog/${post.id}/`,
       date: post.data.date,
       description: post.data.description ?? "",
     });
@@ -26,7 +26,7 @@ export async function GET() {
   for (const post of tilPosts) {
     feed.item({
       title: post.data.title,
-      url: `${WEBSITE_URL}/til/${post.slug}/`,
+      url: `${WEBSITE_URL}/til/${post.id}/`,
       date: post.data.date,
       description: post.data.description || "",
     });

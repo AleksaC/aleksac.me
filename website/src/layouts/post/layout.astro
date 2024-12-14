@@ -4,7 +4,7 @@ import PostBody from "./post-body.astro";
 import PostFooter from "./post-footer.astro";
 import ShareButtons from "@/components/share-buttons.astro";
 import BaseLayout from "../base/layout.astro";
-import { type CollectionEntry } from "astro:content";
+import { render, type CollectionEntry } from "astro:content";
 import ProgressBar from "@/components/progress-bar.astro";
 
 type Props = {
@@ -22,7 +22,7 @@ if (coverImage && !meta?.ogImage) {
   metaTags.ogImage = coverImage;
 }
 
-const { Content } = await post.render();
+const { Content } = await render(post);
 ---
 
 <BaseLayout title={title} meta={metaTags}>

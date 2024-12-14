@@ -2,7 +2,7 @@
 import "@/styles/index.css";
 
 import { TITLE, TAGS } from "@/constants/meta";
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 import RssIcon from "@/components/icons/rss.astro";
 
 import { SOCIAL_MEDIA } from "@/constants/social-media";
@@ -100,7 +100,7 @@ const tags = {
         subtree: false,
       });
     </script>
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body class="dark:text-whiteish">
     <Header routes={routes} links={links} />
