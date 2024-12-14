@@ -1,12 +1,10 @@
 ---
 import Layout from "@/layouts/base/layout.astro";
-import { statSync } from "node:fs";
 
 import { format } from "date-fns";
 
-const fileName = new URL(import.meta.url).pathname;
-const mtime = statSync(fileName).mtime;
-const updatedAt = format(mtime, "LLLL d, yyyy");
+// NOTE: the months start from 0
+const updatedAt = format(new Date(2024, 9, 9), "LLLL d, yyyy");
 ---
 
 <Layout title="Now">
