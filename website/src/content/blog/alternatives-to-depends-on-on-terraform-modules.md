@@ -42,13 +42,12 @@ module "ecs_service" {
 
   ...
 
-  load_balancer = local.lb_is_enabled ? {
+  load_balancer = {
     app = {
-      target_group_arn = aws_lb_target_group.this[0].arn
-      container_name   = local.container_name
-      container_port   = var.app_container_port
+      target_group_arn = aws_lb_target_group.this.arn
+      ...
     }
-  } : null
+  }
 
   depends_on = [
     aws_lb_listener_rule.this
@@ -56,14 +55,10 @@ module "ecs_service" {
 }
 
 resource "aws_lb_target_group" "this" {
-  count = local.lb_is_enabled ? 1 : 0
-
   ...
 }
 
 resource "aws_lb_listener_rule" "this" {
-  for_each = local.lb_is_enabled ? var.lb_rules : {}
-
   ...
 }
 ```
@@ -129,13 +124,12 @@ module "ecs_service" {
     ...
   }
 
-  load_balancer = local.lb_is_enabled ? {
+  load_balancer = {
     app = {
-      target_group_arn = aws_lb_target_group.this[0].arn
-      container_name   = local.container_name
-      container_port   = var.app_container_port
+      target_group_arn = aws_lb_target_group.this.arn
+      ...
     }
-  } : null
+  }
 }
 
 resource "aws_security_group" "app" {
@@ -148,14 +142,10 @@ resource "aws_security_group" "app" {
 }
 
 resource "aws_lb_target_group" "this" {
-  count = local.lb_is_enabled ? 1 : 0
-
   ...
 }
 
 resource "aws_lb_listener_rule" "this" {
-  for_each = local.lb_is_enabled ? var.lb_rules : {}
-
   ...
 }
 ```
