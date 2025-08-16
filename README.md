@@ -2,11 +2,6 @@
 
 Code behind my personal website, [aleksac.me](https://aleksac.me).
 
-[![pre-commit](https://github.com/AleksaC/aleksac.me/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/AleksaC/aleksac.me/actions/workflows/pre-commit.yml)
-[![Spellcheck](https://github.com/AleksaC/aleksac.me/actions/workflows/spellcheck.yml/badge.svg)](https://github.com/AleksaC/aleksac.me/actions/workflows/spellcheck.yml)
-[![Deploy](https://github.com/AleksaC/aleksac.me/actions/workflows/deploy.yml/badge.svg)](https://github.com/AleksaC/aleksac.me/actions/workflows/deploy.yml)
-[![Lighthouse CI](https://github.com/AleksaC/aleksac.me/actions/workflows/lighthouse-ci.yml/badge.svg)](https://github.com/AleksaC/aleksac.me/actions/workflows/lighthouse-ci.yml)
-
 ## About
 
 The website is built using [Astro](https://github.com/withastro/astro), without additional frameworks.
@@ -29,7 +24,7 @@ Astro fit these (almost) perfectly, so I decided to test it and reimplement a su
 of functionality I had in the Next version of the website. This went smoothly, so
 I rewrote the entire website in less than a week.
 
-### Getting started
+## Getting started
 
 This website was tailored for my own use cases, so the code for it has never been
 intended to be reused by anyone other than me. However if you'd like to hack on the
@@ -50,7 +45,7 @@ make dev
 If you don't like Make you can replace the last command with standard `pnpm install`
 and `pnpm run dev`.
 
-### Infra
+## Infra
 
 The website is deployed to [Cloudflare Pages](https://pages.cloudflare.com/).
 It offers great performance and unlimited bandwidth for the low price of free.
@@ -69,8 +64,3 @@ This gets me:
 at the cost of:
 
 - spending a little time writing and maintaining the GitHub workflow
-
-## Contact
-- [Personal website](https://aleksac.me)
-- <a target="_blank" href="http://twitter.com/aleksa_c_"><img alt='Twitter followers' src="https://img.shields.io/twitter/follow/aleksa_c_.svg?style=social"></a>
-- hello@aleksac.me

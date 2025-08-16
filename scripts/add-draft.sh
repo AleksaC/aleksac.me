@@ -70,8 +70,6 @@ title: "$(to_title_case $1)"
 description: ""
 coverImage: ""
 date: "$(date -I'seconds' -u)"
-meta:
-  ogImage: ""
 ---
 EOF
 
