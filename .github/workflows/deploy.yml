@@ -3,7 +3,7 @@ name: Deploy
 on:
   workflow_dispatch:
   push:
-    paths:
+    paths: &paths
       - "website/**.[tj]sx?"
       - "website/**.css"
       - "website/**.astro"
@@ -16,16 +16,7 @@ on:
     branches:
       - main
   pull_request:
-    paths:
-      - "website/**.[tj]sx?"
-      - "website/**.css"
-      - "website/**.astro"
-      - "website/public/**"
-      - "website/**.md"
-      - "website/package.json"
-      - "website/pnpm-lock.yaml"
-      - "website/tsconfig.json"
-      - ".github/workflows/deploy.yml"
+    paths: *paths
     branches:
       - main
 
@@ -43,12 +34,12 @@ jobs:
 
       - uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 10
 
       - name: Set up node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: pnpm
           cache-dependency-path: website/pnpm-lock.yaml
 

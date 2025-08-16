@@ -2,15 +2,13 @@ name: Spellcheck
 
 on:
   push:
-    paths:
+    paths: &paths
       - "**.md"
       - ".github/workflows/spellcheck.yml"
     branches:
       - main
   pull_request:
-    paths:
-      - "**.md"
-      - ".github/workflows/spellcheck.yml"
+    paths: *paths
     branches:
       - main
 
