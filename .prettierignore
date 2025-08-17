@@ -2,7 +2,11 @@ node_modules
 yarn.lock
 package-lock.json
 
-**/*.yaml
-**/*.yml
+**/dist/**/*
+**/.lighthouseci/**/*
+**/.astro/**/*
 
-**/*.md
+*.yaml
+*.yml
+
+*.md
