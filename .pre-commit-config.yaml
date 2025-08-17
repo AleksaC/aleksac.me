@@ -15,13 +15,10 @@ repos:
     hooks:
       - id: prettier
         name: prettier
-        language: node
-        files: \.([tj]sx?|astro)$
-        additional_dependencies:
-          - prettier@v3.4.2
-          - prettier-plugin-tailwindcss@0.6.14
-          - prettier-plugin-astro@0.14.1
-        entry: prettier --write
+        language: system
+        files: \.([tj]sx?|astro|css)$
+        pass_filenames: false
+        entry: pnpm --silent --prefix website prettier --cache --write .
 
       - id: astro-check
         name: astro check
