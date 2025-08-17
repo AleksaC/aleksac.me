@@ -9,7 +9,7 @@ type Props = {
 const { routes, links } = Astro.props;
 ---
 
-<div class="flex-col md:space-x-4 -md:flex">
+<div class="flex max-md:flex-col md:gap-x-4">
   {
     routes.map((route) => (
       // inline-block is set because whitespace is significant for inline elements
@@ -17,7 +17,7 @@ const { routes, links } = Astro.props;
       // unlike jsx astro doesn't remove the spaces https://github.com/withastro/astro/issues/6893
       <a
         class={
-          "inline-block font-bold hover:underline -md:border-b -md:border-current -md:py-2 -md:pl-4"
+          "inline-block font-bold hover:underline max-md:border-b max-md:border-current max-md:py-2 max-md:pl-4"
         }
         href={route.href}
         data-route
@@ -27,7 +27,7 @@ const { routes, links } = Astro.props;
     ))
   }
 </div>
-<div class="flex items-center space-x-4 -md:mt-4 -md:pl-4">
+<div class="flex items-center gap-x-4 max-md:mt-4 max-md:pl-4">
   {
     Object.entries(links).map(([name, { link, icon: Icon, data }]) => (
       <a

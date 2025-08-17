@@ -5,17 +5,33 @@ import TwitterIcon from "@/components/icons/twitter.astro";
 import CopyIcon from "@/components/icons/copy.astro";
 ---
 
-<div class="relative flex space-x-4" data-share-buttons>
-  <button class="share-button" title="Share on Facebook" data-share-facebook>
+<div class="relative flex gap-x-4" data-share-buttons>
+  <button
+    class="flex h-7 w-7 items-center justify-center rounded-full bg-gray-300 dark:bg-[#2F3336]"
+    title="Share on Facebook"
+    data-share-facebook
+  >
     <FacebookIcon />
   </button>
-  <button class="share-button" title="Share on LinkedIn" data-share-linkedin>
+  <button
+    class="flex h-7 w-7 items-center justify-center rounded-full bg-gray-300 dark:bg-[#2F3336]"
+    title="Share on LinkedIn"
+    data-share-linkedin
+  >
     <LinkedinIcon />
   </button>
-  <button class="share-button" title="Share on Twitter" data-share-twitter>
+  <button
+    class="flex h-7 w-7 items-center justify-center rounded-full bg-gray-300 dark:bg-[#2F3336]"
+    title="Share on Twitter"
+    data-share-twitter
+  >
     <TwitterIcon />
   </button>
-  <button class="share-button" title="Copy URL" data-share-copy-url>
+  <button
+    class="flex h-7 w-7 items-center justify-center rounded-full bg-gray-300 dark:bg-[#2F3336]"
+    title="Copy URL"
+    data-share-copy-url
+  >
     <CopyIcon />
   </button>
   <div
@@ -28,21 +44,11 @@ import CopyIcon from "@/components/icons/copy.astro";
       URL Copied
     </div>
     <div
-      class="mr-1 h-0 w-0 border-l-[6px] border-r-[6px] border-t-[8px] border-black border-l-transparent border-r-transparent dark:border-[#2F3336] dark:border-l-transparent dark:border-r-transparent"
+      class="mr-1 h-0 w-0 border-t-8 border-r-[6px] border-l-[6px] border-black border-r-transparent border-l-transparent dark:border-[#2F3336] dark:border-r-transparent dark:border-l-transparent"
     >
     </div>
   </div>
 </div>
-
-<style>
-  .share-button {
-    @apply flex h-7 w-7 items-center justify-center rounded-full bg-gray-300;
-  }
-
-  :global(.dark) .share-button {
-    @apply bg-[#2F3336];
-  }
-</style>
 
 <script>
   const getEncodedHref = () => encodeURIComponent(window.location.href);

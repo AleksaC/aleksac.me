@@ -19,8 +19,8 @@ repos:
         language: node
         files: \.([tj]sx?|astro)$
         additional_dependencies:
-          - prettier@v3.3.3
-          - prettier-plugin-tailwindcss@0.6.6
+          - prettier@v3.4.2
+          - prettier-plugin-tailwindcss@0.6.14
           - prettier-plugin-astro@0.14.1
         entry: prettier --cache --write
 

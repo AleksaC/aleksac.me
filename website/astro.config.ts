@@ -1,9 +1,13 @@
 import { defineConfig } from "astro/config";
-import tailwind from "@astrojs/tailwind";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
+import tailwindcss from "@tailwindcss/vite";
 
-const plugins = [];
+type VitePlugins = NonNullable<
+  ReturnType<typeof defineConfig>["vite"]
+>["plugins"];
+
+const plugins: VitePlugins = [tailwindcss()];
 
 if (process.env.ANALYZE && process.env.ANALYZE.toLowerCase() === "true") {
   const { visualizer } = await import("rollup-plugin-visualizer");
@@ -24,14 +28,14 @@ export default defineConfig({
   },
   vite: {
     plugins,
+    server: {
+      watch: {
+        ignored: ["**/.lighthouseci/**/*"],
+      },
+    },
   },
   prefetch: {
     prefetchAll: true,
     defaultStrategy: "viewport",
   },
-  integrations: [
-    tailwind({
-      applyBaseStyles: false,
-    }),
-  ],
 });
