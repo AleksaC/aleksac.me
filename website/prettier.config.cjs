@@ -13,6 +13,7 @@ const config = {
     require.resolve("prettier-plugin-astro"),
     require.resolve("prettier-plugin-tailwindcss"),
   ],
+  tailwindStylesheet: "./src/styles/index.css",
 };
 
 module.exports = config;
