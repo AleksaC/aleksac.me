@@ -1,13 +1,13 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v6.0.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
 
   - repo: https://github.com/sirosen/check-jsonschema
-    rev: 0.29.1
+    rev: 0.33.2
     hooks:
       - id: check-github-workflows
 
@@ -28,7 +28,7 @@ repos:
         entry: pnpm --silent --prefix website astro check
 
   - repo: https://github.com/errata-ai/vale
-    rev: v3.7.0
+    rev: v3.9.3
     hooks:
       - id: vale
         types_or:
