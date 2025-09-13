@@ -29,6 +29,10 @@
     @apply text-blue-700 underline;
   }
 
+  button {
+    @apply cursor-pointer;
+  }
+
   h1,
   h2,
   h3,
