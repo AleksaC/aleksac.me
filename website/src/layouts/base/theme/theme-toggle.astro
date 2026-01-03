@@ -90,7 +90,5 @@
   window.addEventListener("storage", syncTheme);
 
   setUpToggle();
-  document.addEventListener("astro:after-swap", () =>
-    setUpToggle()
-  );
+  document.addEventListener("astro:after-swap", () => setUpToggle());
 </script>

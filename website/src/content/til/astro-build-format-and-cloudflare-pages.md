@@ -13,7 +13,7 @@ When you navigate to `/about` you may get:
  - a redirect to `/about/` which will then return the page content
  - a 404 page
 
-CloudFlare Pages takes the second option. This means that all your links need
+Cloudflare Pages takes the second option. This means that all your links need
 to end with a trailing slash in order to avoid unnecessary redirects. Thankfully
 there is [an option](https://docs.astro.build/en/reference/configuration-reference/#trailingslash)
 to enforce this in dev server so it's easier to catch. When you set `trailingSlash: 'always'`,

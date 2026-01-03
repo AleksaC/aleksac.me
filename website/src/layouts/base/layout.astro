@@ -93,9 +93,7 @@ const tags = {
       };
 
       setInitialTheme();
-      document.addEventListener("astro:after-swap", () =>
-        setInitialTheme()
-      );
+      document.addEventListener("astro:after-swap", () => setInitialTheme());
     </script>
     <ClientRouter />
   </head>

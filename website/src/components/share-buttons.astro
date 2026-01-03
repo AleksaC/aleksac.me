@@ -107,7 +107,5 @@ import CopyIcon from "@/components/icons/copy.astro";
   };
 
   setUpEventListeners();
-  document.addEventListener("astro:after-swap", () =>
-    setUpEventListeners()
-  );
+  document.addEventListener("astro:after-swap", () => setUpEventListeners());
 </script>

@@ -126,7 +126,5 @@ const { Content } = await render(post);
   };
 
   setUpCopyButtons();
-  document.addEventListener("astro:after-swap", () =>
-    setUpCopyButtons()
-  );
+  document.addEventListener("astro:after-swap", () => setUpCopyButtons());
 </script>

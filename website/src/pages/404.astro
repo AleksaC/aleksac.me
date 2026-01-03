@@ -28,7 +28,5 @@ import Layout from "@/layouts/base/layout.astro";
   };
 
   setUpGoBackButton();
-  document.addEventListener("astro:after-swap", () =>
-    setUpGoBackButton()
-  );
+  document.addEventListener("astro:after-swap", () => setUpGoBackButton());
 </script>

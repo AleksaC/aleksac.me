@@ -82,7 +82,5 @@ const { routes, links } = Astro.props;
   };
 
   setUpNavigationToggle();
-  document.addEventListener("astro:after-swap", () =>
-    setUpNavigationToggle()
-  );
+  document.addEventListener("astro:after-swap", () => setUpNavigationToggle());
 </script>

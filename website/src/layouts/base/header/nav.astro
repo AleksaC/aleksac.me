@@ -58,7 +58,5 @@ const { routes, links } = Astro.props;
   };
 
   setCurrentRoute();
-  document.addEventListener("astro:after-swap", () =>
-    setCurrentRoute()
-  );
+  document.addEventListener("astro:after-swap", () => setCurrentRoute());
 </script>
