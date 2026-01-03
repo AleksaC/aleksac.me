@@ -82,10 +82,7 @@ const { routes, links } = Astro.props;
   };
 
   setUpNavigationToggle();
-
-  const observer = new MutationObserver(setUpNavigationToggle);
-  observer.observe(document.documentElement, {
-    childList: true,
-    subtree: false,
-  });
+  document.addEventListener("astro:after-swap", () =>
+    setUpNavigationToggle()
+  );
 </script>

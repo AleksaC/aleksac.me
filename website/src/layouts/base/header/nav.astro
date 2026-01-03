@@ -58,10 +58,7 @@ const { routes, links } = Astro.props;
   };
 
   setCurrentRoute();
-
-  const observer = new MutationObserver(setCurrentRoute);
-  observer.observe(document.documentElement, {
-    childList: true,
-    subtree: false,
-  });
+  document.addEventListener("astro:after-swap", () =>
+    setCurrentRoute()
+  );
 </script>

@@ -23,13 +23,8 @@
   };
 
   let cleanUp = setUpProgressBar();
-
-  const observer = new MutationObserver(() => {
+  document.addEventListener("astro:after-swap", () => {
     cleanUp();
     cleanUp = setUpProgressBar();
-  });
-  observer.observe(document.documentElement, {
-    childList: true,
-    subtree: false,
   });
 </script>

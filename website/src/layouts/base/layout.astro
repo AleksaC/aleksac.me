@@ -93,12 +93,9 @@ const tags = {
       };
 
       setInitialTheme();
-
-      const observer = new MutationObserver(setInitialTheme);
-      observer.observe(document.documentElement, {
-        childList: true,
-        subtree: false,
-      });
+      document.addEventListener("astro:after-swap", () =>
+        setInitialTheme()
+      );
     </script>
     <ClientRouter />
   </head>

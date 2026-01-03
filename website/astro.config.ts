@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, passthroughImageService } from "astro/config";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import tailwindcss from "@tailwindcss/vite";
@@ -25,6 +25,9 @@ export default defineConfig({
   trailingSlash: "always",
   markdown: {
     rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings],
+  },
+  image: {
+    service: passthroughImageService(),
   },
   vite: {
     plugins,

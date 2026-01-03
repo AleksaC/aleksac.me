@@ -43,13 +43,8 @@
   };
 
   let cleanUp = setUpGoToTopButton();
-
-  const observer = new MutationObserver(() => {
+  document.addEventListener("astro:after-swap", () => {
     cleanUp();
     cleanUp = setUpGoToTopButton();
-  });
-  observer.observe(document.documentElement, {
-    childList: true,
-    subtree: false,
   });
 </script>

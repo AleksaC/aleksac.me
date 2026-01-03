@@ -126,10 +126,7 @@ const { Content } = await render(post);
   };
 
   setUpCopyButtons();
-
-  const observer = new MutationObserver(setUpCopyButtons);
-  observer.observe(document.documentElement, {
-    childList: true,
-    subtree: false,
-  });
+  document.addEventListener("astro:after-swap", () =>
+    setUpCopyButtons()
+  );
 </script>

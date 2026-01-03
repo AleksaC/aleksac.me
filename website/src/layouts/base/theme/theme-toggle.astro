@@ -90,10 +90,7 @@
   window.addEventListener("storage", syncTheme);
 
   setUpToggle();
-
-  const observer = new MutationObserver(setUpToggle);
-  observer.observe(document.documentElement, {
-    childList: true,
-    subtree: false,
-  });
+  document.addEventListener("astro:after-swap", () =>
+    setUpToggle()
+  );
 </script>

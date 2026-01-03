@@ -28,10 +28,7 @@ import Layout from "@/layouts/base/layout.astro";
   };
 
   setUpGoBackButton();
-
-  const observer = new MutationObserver(setUpGoBackButton);
-  observer.observe(document.documentElement, {
-    childList: true,
-    subtree: false,
-  });
+  document.addEventListener("astro:after-swap", () =>
+    setUpGoBackButton()
+  );
 </script>

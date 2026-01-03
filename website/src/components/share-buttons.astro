@@ -107,11 +107,7 @@ import CopyIcon from "@/components/icons/copy.astro";
   };
 
   setUpEventListeners();
-
-  // MutationObserver is used to set up listeners on clientside routing
-  const observer = new MutationObserver(setUpEventListeners);
-  observer.observe(document.documentElement, {
-    childList: true,
-    subtree: false,
-  });
+  document.addEventListener("astro:after-swap", () =>
+    setUpEventListeners()
+  );
 </script>
