@@ -15,11 +15,10 @@
   "dependencies": {
     "@astrojs/check": "^0.9.6",
     "@tailwindcss/vite": "^4.1.12",
-    "@types/node": "^22.10.2",
+    "@types/node": "^24.0.0",
     "@types/rss": "^0.0.32",
     "astro": "^5.16.6",
     "astro-parallel-build-check": "^0.1.6",
-    "date-fns": "^3.6.0",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-slug": "^6.0.0",
     "rollup-plugin-visualizer": "^5.12.0",

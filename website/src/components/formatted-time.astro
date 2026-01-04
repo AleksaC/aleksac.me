@@ -1,6 +1,4 @@
 ---
-import { format } from "date-fns";
-
 type Props = {
   date: Date;
 };
@@ -9,5 +7,12 @@ const { date } = Astro.props;
 ---
 
 <time datetime={date.toISOString()}>
-  {format(date, "LLLL d, yyyy")}
+  {
+    date.toLocaleDateString("en-US", {
+      timeZone: "UTC",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+  }
 </time>
