@@ -27,6 +27,8 @@ defaults:
 
 jobs:
   build-and-deploy:
+    env:
+      BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -65,15 +67,13 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
-          npx wrangler@3 pages deploy ./dist --project-name=aleksac-me --branch ${{ github.head_ref || github.ref_name }}
+          npx wrangler@3 pages deploy ./dist --project-name=aleksac-me --branch "$BRANCH_NAME"
 
       # This is needed by lighthouse ci to run on previews on branches other than
       # the default branch. This info needs to be obtained this way because actions
       # triggered by `worflow_run` run against the default branch
       # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#using-data-from-the-triggering-workflow
       - name: Save branch name
-        env:
-          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
         run: |
           mkdir -p ./branch-name
           echo -n $BRANCH_NAME > ./branch-name/branch-name
