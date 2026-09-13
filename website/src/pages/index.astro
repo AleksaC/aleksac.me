@@ -4,53 +4,61 @@ import Layout from "@/layouts/base/layout.astro";
 ---
 
 <Layout title="About">
-  <div class="mx-auto max-w-4xl pb-10 md:pb-0 xl:pb-10 2xl:pb-0">
+  <div class="mx-auto max-w-4xl pb-10 md:pb-0 xl:pb-10">
     <div>
       <h3 class="mb-4">About me</h3>
       <p>
-        Hi, I'm Aleksa Ćuković, a software engineer from Montenegro. I enjoy
-        solving problems and building things. I especially like building stuff
-        that I can use myself, hence I prefer to work on infrastructure and
-        developer tooling. When I'm not working I'm probably hacking on my side
-        projects, hanging out with my friends and family, lifting weights,
-        playing basketball or traveling. Check out my <a href="now/">now page</a
-        >
-        to see what I've been up to lately.
-        <br />
-        <br />
-        Not long ago my main interest was AI/ML. My main contribution to the field
-        is a large quantity of memes I made and posted on my meme{" "}
-        <a href="https://www.facebook.com/artificialintelligencememes">page</a>
-        and <a href="https://twitter.com/ai_memes">twitter account</a> which were
-        among the first and most popular accounts of that kind at the time.
+        Hi, I'm Aleksa Ćuković - a software engineer from Montenegro, living in
+        Amsterdam. I enjoy learning, solving problems and building things. I
+        especially like building stuff that I can use myself, hence I prefer to
+        work on infrastructure and developer tooling. When I'm not working I'm
+        hacking on my side projects, hanging out with friends and family,
+        watching TV shows, lifting weights, playing basketball or traveling. To
+        see what I've been up to lately, check out my <a href="now/">now page</a
+        >.
       </p>
     </div>
     <div>
       <h3 class="mt-8 mb-4">About my work</h3>
       <p>
-        Currently I'm getting paid to build infrastructure on AWS and
-        Kubernetes. If you're doing the same but would rather spend more time
-        focusing on your business, hit me up, I might be able to help with that.
+        I work as a site reliability engineer at FareHarbor - one of the less
+        well known companies in the Booking Holdings portfolio, if you ever
+        booked a tour or activity online, there's a high chance our platform was
+        what made that possible. Before that I worked at smaller companies in
+        Montenegro and did a lot of freelance work, mostly for small companies
+        and startups.
         <br />
         <br />
-        For most of my career I've been working with JavaScript/TypeScript and Python,
-        but lately I've been mostly using Go, and I would love to work more with Rust.
-        I'm passionate about open source and have made many small contributions to
-        various projects and open sourced some of my own work. My OSS work is available
-        on my <a href={SOCIAL_MEDIA.github.link}>GitHub account</a>. For more
-        info about my career check out my hopefully only slightly outdated
-        <a href="resume.pdf" data-astro-prefetch="false">resume</a>.
+        I like open source software and have made many small contributions to various
+        projects and open sourced some of my own work. Most of it is available on
+        my <a href={SOCIAL_MEDIA.github.link}>GitHub account</a>.
       </p>
     </div>
     <div>
       <h3 class="mt-8 mb-4">About this website</h3>
       <p>
-        Apart from being a central part of my online presence, my goal with this
-        website is to write about stuff I find important and interesting. I've
-        noticed a widening gap between my experiences, especially as a software
-        developer, and stuff that's being written about, so I'm trying to close
-        that gap. When it comes to tech behind the website, it's a static site
-        built with Astro and hosted on Cloudflare Pages.
+        My goals with this website changed a bit over time, though they haven't
+        really been clear at any point. I've seen a bunch of great personal
+        websites and read many great posts on them, so I guess I wanted
+        something like that for myself. Unfortunately I haven't been able to
+        dedicate the time and effort to make this into a reality yet, so for now
+        this website mostly serves as an intorduciton to myself that I can
+        reference across diferent point of my online presence.
+        <br />
+        <br />
+        The main technical constraints I optimized for while building this website
+        were to be easy to develop and maintain, fast and as cheap as possible to
+        host. I'm thankful for Astro and Cloudflare Pages for making it easy to achieve
+        this goal. Both code and content for this website lives in a
+        <a href="https://github.com/AleksaC/aleksac.me">public GitHub repo</a>,
+        so you can open issues if you come across any.
+        <br />
+        <br />
+        The first iteration of this website predates the LLM era and the majority
+        of the development work on it was done before LLMs were good at writing code
+        so it's still entirely hand-crafted. I intend to keep it that way, mostly
+        because I don't use AI for writing and I'm not planning to do any development
+        other than small tweaks that are probably easier to do by hand.
       </p>
     </div>
     <div>
@@ -60,8 +68,9 @@ import Layout from "@/layouts/base/layout.astro";
         <a href="mailto:hello@aleksac.me">hello@aleksac.me</a>. Since I've
         mostly had positive experience with people reaching out, my DMs are open
         and you can contact me on
-        <a href={SOCIAL_MEDIA.twitter.link}>twitter</a>
-        and <a href={SOCIAL_MEDIA.instagram.link}>instagram</a>.
+        <a href={SOCIAL_MEDIA.twitter.link}>Twitter</a>
+        and <a href={SOCIAL_MEDIA.instagram.link}>Instagram</a>. You can also
+        connect with me on <a href={SOCIAL_MEDIA.linkedin.link}>LinkedIn</a>.
       </p>
     </div>
   </div>
